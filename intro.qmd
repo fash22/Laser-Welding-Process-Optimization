@@ -1,0 +1,13 @@
+# Introduction
+
+Laser welding is a process that utilizes a high-powered laser beam to join materials together. It is commonly used in various industries such as automotive, aerospace, and electronics. The purpose of laser welding is to create strong and precise welds with minimal heat input, resulting in reduced distortion and improved overall quality. Compared to traditional welding processes, laser welding offers several advantages including higher welding speeds, smaller heat-affected zones, and the ability to weld dissimilar materials.
+
+Welding cracks are defects that can occur during the welding process. These cracks can significantly impact the quality and cost of the final product. They can compromise the structural integrity of the weld, leading to potential failures and safety hazards. Additionally, the presence of welding cracks often requires rework or scrap, increasing production costs and causing delays. Therefore, it is crucial to minimize welding cracks to ensure high-quality and cost-effective welding operations.
+
+The aim of this project is to reduce the cost of rework and scrap, as well as minimize the risk of customer/market claims related to welding cracks. By identifying the optimal parameters and factors that can minimize welding cracks, businesses can improve their welding processes, enhance product quality, and reduce associated costs.
+
+The objective of this study is to find the optimal parameters/factors that can minimize welding cracks in laser welding. It involves identifying the important features that affect welding cracks and understanding the effect of each parameter/factor of the laser welding process on the occurrence of welding cracks.
+
+In this project, we will be utilizing the CRoss-Industry Standard Process for Data Mining (CRISP-DM) methodology. CRISP-DM is a widely recognized and proven approach for solving data mining problems. It consists of six phases: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation, and Deployment. By following this methodology, we can systematically analyze the data, develop models, and evaluate their effectiveness in addressing the problem statement.
+
+The "Screening datasets for laser welded steel-copper lap joints" dataset will be used in this study. This dataset contains various parameters and factors related to laser welding, as well as information on the occurrence of welding cracks. By applying the CRISP-DM methodology to this dataset, we can gain insights into the relationship between the welding process parameters and welding cracks, and ultimately identify the optimal conditions for minimizing welding cracks.

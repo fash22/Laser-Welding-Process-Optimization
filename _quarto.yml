@@ -1,0 +1,29 @@
+project:
+  type: book
+
+book:
+  title: "Optimizing Laser Welded Steel-copper Lap Joints"
+  subtitle: An application of statistical learning to reduce cost in manufacturing setting.
+  author: "John Rey Faciolan"
+  date: "9/16/2023"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - laser-welding-process.qmd
+    - project_overview.qmd
+    - retrieving-data.qmd
+    - exploring-data.qmd
+    - modelling.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

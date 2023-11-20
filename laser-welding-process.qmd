@@ -1,0 +1,18 @@
+# Laser Welding Process
+
+The laser welding process described in the dataset involves joining steel and copper lap joints using a high-powered laser beam. The steel-copper lap joints were prepared by overlapping a steel sheet and a copper sheet, creating a joint area where the laser welding would take place. The dataset includes six factors that were varied during the laser welding process.
+
+These factors are:
+
+1. **Laser beam power (W)**: This refers to the power of the laser beam used in the welding process. It determines the intensity of the laser beam and can affect the depth and quality of the weld.
+2. **Welding speed (m/min)**: The welding speed refers to the rate at which the laser beam moves along the joint during the welding process. It affects the heat input and the cooling rate, which can influence the formation of welding cracks.
+3. **Angular position in welding direction (°)**: This factor represents the angular position of the laser beam in relation to the welding direction. It can affect the distribution of heat and the formation of welding cracks.
+4. **Focal position (mm)**: The focal position refers to the distance between the laser beam focus and the joint surface. It determines the spot size and the energy density of the laser beam, which can impact the weld quality and the occurrence of welding cracks.
+5. **Gas flow rate (l/min)**: The gas flow rate represents the rate at which shielding gas is supplied during the welding process. Shielding gas is used to protect the weld pool from atmospheric contamination. The gas flow rate can influence the cooling rate and the formation of welding cracks.
+6. **Material thickness of the steel sheet (mm)**: This factor represents the thickness of the steel sheet used in the lap joint. The thickness can affect the heat input and the cooling rate, which can influence the formation of welding cracks.
+
+These factors were chosen based on their potential influence on the occurrence of welding cracks. To create the dataset, 18 parameter combinations were selected, representing different combinations of the six factors. Each parameter combination was repeated five times, resulting in a total of 90 welding experiments. Additionally, each sheet was cut four times to generate a total of 360 cross sections.
+
+Each line in the dataset represents a cross section that was evaluated for the dimensions of the weld metal. The dataset provides information on the weld depth and the gesometrical dimensions of the weld metal in the laser welded steel-copper lap joints.
+
+The [Screening datasets for laser welded steel-copper lap joints](https://data.mendeley.com/datasets/2s5m3crbkd/2)(see @Rinne2021) has two versions: **V1** and **V2**. In **V1**, the dataset includes information on the occurrence of welding cracks, as well as the dimensions of the weld metal. In **V2**, additional information on the occurrence of partial penetration and the dimensions of the heat-affected zone is included. The **V1.1** and **V2.1** versions of the dataset were created to address some inconsistencies and errors found in the original versions (**V1** and **V2**). Overall, the dataset provides valuable information on the relationship between the welding process parameters and the occurrence of welding cracks in laser welded steel-copper lap joints. By analyzing this dataset, researchers can gain insights into the optimal conditions for minimizing welding cracks and improving the quality of laser welding operations.

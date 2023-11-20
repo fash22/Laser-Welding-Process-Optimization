@@ -1,0 +1,147 @@
+# Data Wrangling
+In order to develop a machine learning model that can effectively highlight the correlation between input parameters and the incidence of defects, we will be using version 1.0 of the dataset. This version contains a set of machine parameter combinations and a binary target variable.
+
+Although version 1.1 of the dataset includes additional information about weld width, weld gap, crack count, and crack length, we have decided not to include these features in our models. This is because they contain information about the occurrence of cracks, which could potentially lead to biased results. These additional features can be considered as leaky features and may negatively impact the performance of our models.
+
+Before we can proceed with data wrangling, it is important to have a deeper understanding of the purpose of each column in the dataset. This will help us identify which columns are features, targets, and unwanted variables, which will be useful during the modeling phase.
+
+```{python}
+# | fig-cap: Importing and showing the 1st 5-rows of the V1.0 of Screening datasets for laser welded steel-copper lap joints
+import pandas as pd
+
+dataset_uri = "datasets/Screening datasets for laser welded steel-copper lap joints/V1 and V2/Definitive screening steel-copper lap joints V1.xlsx"
+
+dataset = pd.read_excel(dataset_uri)
+
+dataset.head().T
+```
+
+## Dropping Unwanted Variables
+Before wrangling the data, its important to have a deeper understanding of the purpose of each columns. Thus, having known which of these columns were features, targets, and unwanted, would be a great help later during the modelling phase.
+
+### Identifying the Feature Variables
+As highlighted in the [Laser Welding Process](laser-welding-process.qmd) page, the dataset contains 6 features representing the 6 different factors to be studied. These factors include laser beam power, welding speed, angular position in welding direction, focal position, gas flow rate, and material thickness of the steel sheet. Additionally, there are 2 features for identifying the weld number and cross section position.
+
+#### Factors to be Studied
+1. Laser beam power (W)
+2. Welding speed (m/min)
+3. Angular position in welding direction (°)
+4. Focal position (mm)
+5. Gas flow rate (l/min)
+6. Material thickness of the steel sheet (mm)
+
+#### Experiment Identification
+1. weld number
+2. cross section positon in the weld (mm)
+
+### Identifying the Target Variables
+The dataset contains 4 continuous target variables and 1 binary target variable. For this study, we will be focusing on the binary target variable, which indicates the presence or absence of cracking in the weld metal. The remaining 4 continuous target variables will be dropped from our analysis.
+
+#### Binary Target Variable
+1. cracking in the weld metal
+
+#### Continuous Variables
+1. weld seam width steel (µm)
+2. weld seam width copper (µm)
+3. weld depth copper (µm)
+4. gap
+
+The python code below categorizes each of the columns of the dataset, and drops the unnecessary columns.
+
+```{python}
+FEATURES = [
+    'power (W)',
+    'welding speed (m/min)',
+    'gas flow rate (l/min)',
+    'focal position (mm)',
+    'angular position (°)',
+    'material thickness (mm)',
+]
+
+EXPERIMENT_ID = [
+    'weld number',
+    'cross section positon in the weld (mm)',
+]
+
+TARGET = [
+    'cracking in the weld metal',
+]
+
+UNNECESSARY_COLS = [
+    'weld seam width steel (µm)',
+    'weld seam width copper (µm)',
+    'weld depth copper (µm)',
+    'gap'
+]
+
+# Drop unnecessary columns
+dataset.drop(UNNECESSARY_COLS,inplace=True,axis=1)
+
+# Check the new dataset
+dataset.head().T
+```
+
+## Encoding Categorical Variables
+Before feeding the dataset into machine learning models, we need to encode the categorical variable "cracking in the weld metal" into a numeric format. This can be done by mapping "yes" to 1 and "no" to 0.
+
+```{python}
+dataset["cracking in the weld metal"] = dataset["cracking in the weld metal"].map(
+    {
+        "no" : 0,
+        "yes": 1
+    },
+)
+
+dataset.head().T
+```
+
+## Quantifying Missing Data
+To ensure that our machine learning models can be trained effectively, we need to address any missing data. Fortunately, this dataset does not contain any missing data.
+
+```{python}
+dataset.isna().sum()
+```
+
+## Data Visualization
+In order to gain a deeper understanding of the distribution and relationship of each variable, we will explore the dataset visually.
+
+### Data Distribution
+Visualizing the distribution of our data will help us understand its central tendency and spread. This can be achieved using histograms.
+```{python}
+# | fig-cap: Histogram of the 6-parameters to be studied. Based on above plot, only three levels per parameters were gathered.
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+for i in range(len(FEATURES)):
+    plt.subplot(3,2,i+1)
+    sns.histplot(dataset[FEATURES[i]])
+
+plt.tight_layout()
+```
+
+```{python}
+# | fig-cap: Histogram of the target variable. Based on above plot, the target variable was highlighly imbalanced -- less than 20% of the dataset has a value of `1`.
+sns.histplot(dataset[TARGET], discrete=True, stat="density");
+```
+
+### Correlation Heatmap
+Some machine learning models assume that input features are not correlated. To check for correlations, we will generate a heatmap of the correlation matrix of our input features. This heatmap will also help us identify which features are correlated with the target variable.
+```{python}
+# | fig-cap: Heatmap of the correlation matrix of the feature variables.
+corr_matrix = dataset[FEATURES].corr()
+sns.heatmap(corr_matrix, annot=True, fmt=".2f");
+```
+
+Based on the correlation heatmap, we can observe the following:
+
+1. There is no multicollinearity among the input features.
+2. The features "power," "angular position," and "material thickness" are positively correlated with the presence of cracking in the metal weld.
+3. The feature "gas flow rate" is negatively correlated with the presence of cracking in the metal weld.
+
+## Exporting the Dataset
+```{python}
+dataset.to_csv("datasets/V1.csv")
+```
+
+## Conclusion
+In conclusion, we have explored the dataset and identified the relevant features and target variables for our machine learning model. We have also encoded the binary target variable and visualized the data distribution and correlations. The next steps will involve training and evaluating our machine learning models using this prepared dataset.

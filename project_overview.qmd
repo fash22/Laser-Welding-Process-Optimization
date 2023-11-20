@@ -1,0 +1,82 @@
+# Project Overview
+
+## Objective
+This project is focused on the creation of a machine learning model capable of predicting crack formation in laser-welded steel-copper lap joints. By analyzing various process parameters, the model aims to understand and highlight the correlation between these parameters and the incidence of defects. The ultimate goal is to enhance the welding process, improve joint quality and reliability, and reduce costs associated with rework and scrap in industries utilizing laser welding for steel-copper lap joints.
+
+## Solution Usage
+The proposed solution, a predictive machine learning model, will serve as an integral tool in the laser welding industry. The model, once trained and validated, can be incorporated into the manufacturing workflow.
+
+Prior to welding, the model will ingest process parameters such as laser power, welding speed, and focus position. It will then predict the likelihood of crack formation in the welded joint under these conditions.
+
+In case of a high-risk prediction, parameters can be iteratively adjusted and re-evaluated by the model until an acceptable risk level is reached. This facilitates real-time optimization of the welding process, thereby reducing defect occurrence and enhancing product quality.
+
+Furthermore, the model can aid strategic planning and decision-making by offering insights into how different parameters influence weld quality. This can steer research and development towards more efficient welding techniques and technologies.
+
+In essence, this machine learning model is poised to be a valuable asset for operational optimization and strategic planning in industries employing laser welding of steel-copper lap joints.
+
+## Current Solution 
+The prevention of cracks in laser-welded steel-copper lap joints currently involves understanding the mechanism of solidification cracking and implementing measures to control it (@rinne2021investigations, @gao2022formation). 
+
+Solidification cracking in welds is a synergistic effect of ε phase liquation, inclusions, and composition segregation (@rinne2021investigations, @gao2022formation). The welding process can cause grain boundary liquation, reducing cohesion between grains and resistance to intergranular crack propagation (@rinne2021investigations, @gao2022formation). Composition segregation within grains can induce lattice distortion, reducing the material's plastic deformation capacity and increasing crack susceptibility (@rinne2021investigations, @gao2022formation).
+
+An oscillating laser has been proposed as an effective solution to inhibit solidification cracking (@rinne2021investigations, @gao2022formation). Laser oscillating welding promotes grain refinement, solute diffusion, and the formation of uniformly distributed ε-Cu precipitated phases in welds (@rinne2021investigations, @gao2022formation). This improves intergranular bonding, reduces solidification cracking susceptibility, and increases resistance to plastic deformation (@rinne2021investigations, @gao2022formation). The tensile strength of joints using laser oscillating welding is 251 MPa, a 35.7% increase compared to 185 MPa using standard laser welding (@rinne2021investigations, @gao2022formation). The strain of joints using laser oscillating welding is 3.69, a 96% increase compared to 1.88 using standard laser welding (@rinne2021investigations, @gao2022formation).
+
+While these solutions enhance joint quality and reliability, they require a deep understanding of the welding process and careful parameter control. This is where our machine learning model can add significant value by accurately predicting crack formation based on process parameters and guiding optimization efforts.
+
+## Problem Framing
+The problem is structured as a supervised learning task. We have a labeled dataset from Mendeley Data, with known occurrences of cracks in laser-welded steel-copper lap joints (the target variable) for various process parameters (the features). The objective is to train a model on this data to predict the target variable for new, unseen data.
+
+The model will undergo offline training, meaning we will use a static dataset for training, and the model will not learn continuously from new data. Once trained and validated, the model can be deployed to predict crack occurrences based on specified input parameters.
+
+However, it’s crucial to acknowledge that while the initial model training is offline, periodic retraining may be required to maintain high predictive performance as welding processes and techniques evolve. This retraining would also be conducted offline, using a new static dataset encompassing the most recent welding data.
+
+## Performance Metric
+The model’s performance will be evaluated using the F1 Score, a metric that balances precision and recall. Precision quantifies the proportion of positive identifications that were correct, while recall quantifies the proportion of actual positives correctly identified.
+
+The F1 Score is especially useful in scenarios where both false positives and false negatives are present. In this project’s context, a false positive implies a prediction of crack formation where none occurs, and a false negative implies a prediction of no crack formation where one does occur. Both scenarios could have significant implications in the laser welding industry, making it crucial to minimize both, which is what the F1 Score aims to achieve.
+
+By employing the F1 Score as our performance metric, we strive to develop a model that not only accurately predicts crack formation but also minimizes both false positives and false negatives.
+
+## Performance Metric and Business Objectives
+The F1 Score aligns with the business objective of this project, which is to develop a machine learning model capable of accurately predicting crack occurrence in laser-welded steel-copper lap joints based on process parameters. Understanding the relationship between these parameters and crack formation will optimize the welding process, minimize defects, enhance joint quality and reliability, reduce rework and scrap costs, and ultimately improve the bottom line for industries relying on laser welding of steel-copper lap joints.
+
+The F1 Score is a measure of model accuracy that balances precision (the proportion of positive identifications that were correct) and recall (the proportion of actual positives correctly identified). This balance ensures the model accurately predicts crack formation while minimizing both false positives (predicting a crack will form when it does not) and false negatives (predicting a crack will not form when it does). Both scenarios could have significant implications in the laser welding industry, making it crucial to minimize both.
+
+By employing the F1 Score as our performance metric, we aim to create a model that not only accurately predicts crack formation but also minimizes both false positives and false negatives. This aligns well with our business objective.
+
+## Minimum Performance
+The minimum performance required to meet the business objectives would be contingent on the specific needs and constraints of the industries utilizing this model. Generally, a high F1 Score would be desirable, indicating accurate crack prediction while minimizing both false positives and false negatives.
+
+For example, an F1 Score of at least 0.85 could serve as a reasonable benchmark. This implies that the model correctly identifies the presence or absence of cracks 85% of the time, maintaining a balance between precision and recall.
+
+However, this is merely a guideline, and actual minimum performance may vary. Factors such as the cost implications of false positives and negatives, the overall impact on production efficiency, and industry standards for quality and reliability would all influence the acceptable performance level.
+
+The ultimate objective is to create a model that aids in optimizing the welding process and minimizing defects, thereby enhancing product quality and reducing costs. Therefore, the model’s performance should be sufficiently high to achieve these goals.
+
+## Similar Problems
+There are several comparable problems in the field of manufacturing and materials science where machine learning models have been used to predict outcomes based on various parameters. Here are a few examples:
+
+1. **Predicting Welding Distortion**: Just like predicting cracks in laser-welded steel-copper lap joints, predicting welding distortion is another problem in the welding industry (@rinne2021investigations, @{gao2022formation}). Machine learning models can be trained on various welding parameters and the resulting distortion to predict future distortions based on these parameters (@rinne2021investigations, @{gao2022formation}).
+
+2. **Predicting Material Properties**: Machine learning models have been used to predict the properties of materials based on their composition and manufacturing processes (@rinne2021investigations, @{gao2022formation}). This is similar to predicting cracks in laser-welded steel-copper lap joints, where the outcome (crack formation) is predicted based on various process parameters (@rinne2021investigations, @{gao2022formation}).
+
+3. **Quality Control in Manufacturing**: Machine learning models are often used in quality control applications in various manufacturing industries (@rinne2021investigations, @{gao2022formation}). These models can predict the quality of a product based on various factors such as machine settings, environmental conditions, and material properties (@rinne2021investigations, @{gao2022formation}).
+
+In all these cases, the experience and tools used for developing and training the machine learning models can be reused. The process of data preprocessing, feature selection, model training, validation, and testing are common across these problems. Tools and libraries such as Python's scikit-learn or TensorFlow can be used to develop the machine learning models. Furthermore, techniques for handling imbalanced data, tuning model parameters, and evaluating model performance can also be applied to this problem.
+
+## Human Expertise
+human expertise is available in the field of laser welding and machine learning. Experts in laser welding can provide valuable insights into the welding process, the formation of cracks, and the various parameters that affect weld quality. They can also help in collecting and labeling data for training the machine learning model.
+
+Machine learning experts, on the other hand, can help in developing and training the model. They can provide guidance on data preprocessing, feature selection, model selection, and hyperparameter tuning. They can also help in evaluating the performance of the model and suggesting improvements.
+
+Collaboration between these two groups of experts can be highly beneficial for this project. Laser welding experts can provide domain knowledge to guide the development of the machine learning model, while machine learning experts can apply their technical expertise to build a robust and accurate model.
+
+## Methodology
+To solve this problem, the following steps would be conducted:
+
+- **Exploratory Data Analysis**: This step involves visualizing and summarizing the data to understand its characteristics, distribution, and patterns. It also helps to identify any outliers, missing values, or anomalies in the data.
+- **Data Cleaning & Feature Engineering**: This step involves preparing the data for modeling by removing or imputing any missing values, outliers, or noise. It also involves creating new features or transforming existing ones to capture more information from the data and improve the model performance.
+- **Model Selection**: This step involves choosing the most suitable machine learning algorithm for the problem, based on the data type, size, complexity, and desired outcome. Some common algorithms for welding crack detection are convolutional neural networks, support vector machines, and random forests.
+- **Hyper-parameter Tuning**: This step involves finding the optimal values for the parameters that control the behavior and performance of the chosen algorithm. This can be done using techniques such as grid search, random search, or Bayesian optimization.
+- **Ensembling**: This step involves combining multiple models to create a more robust and accurate model. This can be done using techniques such as bagging, boosting, or stacking.
+- **Presentation**: This step involves presenting the results and insights from the model to the stakeholders, using appropriate visualizations, metrics, and explanations. It also involves discussing the limitations, challenges, and future directions of the model.

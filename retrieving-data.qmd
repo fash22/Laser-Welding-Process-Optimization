@@ -1,0 +1,63 @@
+# Retrieving the Dataset
+The "Screening datasets for laser welded steel-copper lap joints" dataset is a valuable resource for researchers and engineers working in the field of laser welding. This dataset provides comprehensive information on the performance of steel-copper lap joints under different welding conditions [@Rinne2021]. In this article, we will explore the different versions of the dataset, where to download them, their file types, and how to load them using the pandas library.
+
+At the time of this writing, this dataset have 4 versions:
+
+- **V1**: The initial version of the dataset.
+- **V1.1**: An updated version of V1 with additional data.
+- **V2**: A major update to the dataset with expanded features.
+- **V2.1**: A minor update to V2, addressing some issues and providing further enhancements.
+
+
+
+## Downloading the Dataset
+To download the this dataset, the following python function was defined and used.
+```{python}
+import os
+import urllib.request
+import zipfile
+
+def download_file(url, filename):
+    # Check if file already exists in the directory
+    if os.path.exists(f"datasets/{filename}"):
+        # Print the directory tree relative to the datasets folder
+        for root, dirs, files in os.walk("datasets"):
+            level = root.replace("datasets", "").count(os.sep)
+            indent = " " * 4 * (level)
+            print(f"{indent}{os.path.basename(root)}/")
+            subindent = " " * 4 * (level + 1)
+            for f in files:
+                print(f"{subindent}{f}")
+    else:
+        # Download the file from the internet
+        urllib.request.urlretrieve(url, f"datasets/{filename}")
+        print(f"File '{filename}' downloaded successfully.")
+        
+        # Extract the zip file
+        with zipfile.ZipFile(f"datasets/{filename}", 'r') as zip_ref:
+            zip_ref.extractall("datasets")
+        
+        # Print the directory tree relative to the datasets folder
+        for root, dirs, files in os.walk("datasets"):
+            level = root.replace("datasets", "").count(os.sep)
+            indent = " " * 4 * (level)
+            print(f"{indent}{os.path.basename(root)}/")
+            subindent = " " * 4 * (level + 1)
+            for f in files:
+                print(f"{subindent}{f}")
+
+url = "https://prod-dcd-datasets-cache-zipfiles.s3.eu-west-1.amazonaws.com/2s5m3crbkd-2.zip"
+filename = "laser-welding.zip"
+download_file(url, filename)
+```
+
+Explanation:
+
+1. The code imports the necessary modules: `os` for file and directory operations, `urllib.request` for downloading files from the internet, and `zipfile` for extracting zip files.
+2. The function `download_and_extract_file` takes two parameters: `url` (the URL of the file to be downloaded) and `filename` (the name of the file to be saved in the local directory).
+3. It checks if the file already exists in the `datasets` directory using the `os.path.exists` function. If it exists, it prints the directory tree relative to the `datasets` folder using the `os.walk` function.
+4. If the file does not exist, it downloads the file from the internet using `urllib.request.urlretrieve` and saves it in the `datasets` directory.
+5. It then extracts the zip file using the `zipfile.ZipFile` context manager and the `extractall` method, saving the extracted files in the `datasets` directory.
+6. Finally, it prints the directory tree relative to the `datasets` folder using the `os.walk` function.
+
+This code allows for downloading and extracting files from the internet, while also checking if the file already exists in the local directory. It provides a convenient way to manage datasets and avoid unnecessary downloads.
