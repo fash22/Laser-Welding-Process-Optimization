@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Optimizing Laser Welded Steel-copper Lap Joints - 6&nbsp; Modelling</title>
+<title>Optimizing Laser Welded Steel-copper Lap Joints - 6&nbsp; Machine Learning Model Comparison</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -111,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modelling.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modelling</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modelling.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Machine Learning Model Comparison</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -175,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modelling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Machine Learning Model Comparison</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -207,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#modelling" id="toc-modelling" class="nav-link" data-scroll-target="#modelling"><span class="header-section-number">6.5</span> Modelling</a></li>
   <li><a href="#training-the-model" id="toc-training-the-model" class="nav-link" data-scroll-target="#training-the-model"><span class="header-section-number">6.6</span> Training the Model</a></li>
   <li><a href="#classification-report" id="toc-classification-report" class="nav-link" data-scroll-target="#classification-report"><span class="header-section-number">6.7</span> Classification Report</a></li>
-  <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation"><span class="header-section-number">6.8</span> Model Evaluation</a>
+  <li><a href="#evaluating-models-for-detecting-welding-cracks" id="toc-evaluating-models-for-detecting-welding-cracks" class="nav-link" data-scroll-target="#evaluating-models-for-detecting-welding-cracks"><span class="header-section-number">6.8</span> Evaluating Models for Detecting Welding Cracks</a>
   <ul class="collapse">
   <li><a href="#gaussiannb-model" id="toc-gaussiannb-model" class="nav-link" data-scroll-target="#gaussiannb-model"><span class="header-section-number">6.8.1</span> GaussianNB Model</a></li>
   <li><a href="#support-vector-classifier" id="toc-support-vector-classifier" class="nav-link" data-scroll-target="#support-vector-classifier"><span class="header-section-number">6.8.2</span> Support Vector Classifier</a></li>
@@ -223,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modelling</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Machine Learning Model Comparison</span></h1>
 </div>
 
 
@@ -238,13 +238,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>On the <a href="./exploring-data.html">Data Wrangling</a> section, it was found that the 6-machine paramaters to be studied were discrete values with three levels each, and the target variable was a highly imbalanced binary variable.</p>
-<p>In this section, the dataset will be fed into different machine learning models to find an optimal model that can help us understand the mapping between the input and output variables. To do this, the dataset should be splitted into two parts namely, the training set, and the testing set with test size of 20%. The training set will be used during model training, and cross validation while the testing set will be used to evaluate the model performance on unseen data.</p>
-<p>Once the data was splitted, it will be loaded to different out-of-the-box machine learning models from scikit-learn library. At this stage, the only goal is to find the optimal model using their default hyperparameters.</p>
-<p>Finally, each of the model’s training and testing performance will be compared and evaluated. The goal is to shortlist the top performing model.</p>
+<p>In the previous section on <a href="./exploring-data.html">Data Wrangling</a>, it was discovered that the 6 machine parameters to be studied had discrete values with three levels each, and the target variable was a highly imbalanced binary variable.</p>
+<p>In this section, we will feed the dataset into different machine learning models to find the optimal model that can help us understand the relationship between the input and output variables. To do this, we will split the dataset into a training set and a testing set, with a test size of 20%. The training set will be used for model training and cross-validation, while the testing set will be used to evaluate the model’s performance on unseen data.</p>
+<p>Once the data is split, we will load it into different out-of-the-box machine learning models from the scikit-learn library. At this stage, our goal is to find the optimal model using their default hyperparameters.</p>
+<p>Finally, we will compare and evaluate the training and testing performance of each model. The objective is to shortlist the top-performing model.</p>
 <section id="importing-relevant-libraries" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="importing-relevant-libraries"><span class="header-section-number">6.1</span> Importing Relevant Libraries</h2>
-<p>The following code below contains all of the import statements for this section.</p>
+<p>The following code contains all the necessary import statements for this section.</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data Wrangling</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -285,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="importing-the-dataset" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="importing-the-dataset"><span class="header-section-number">6.2</span> Importing the Dataset</h2>
-<p>The following code below loads the dataset pre-processed from <a href="./exploring-data.html">EDA</a> section into pandas <code>DataFrame</code>.</p>
+<p>The code below loads the pre-processed dataset from the EDA section into a pandas DataFrame.</p>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dataset_uri <span class="op">=</span> <span class="st">"datasets/V1.csv"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> pd.read_csv(dataset_uri, index_col<span class="op">=</span><span class="dv">0</span>)</span>
@@ -380,7 +380,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="vertical-data-splitting" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="vertical-data-splitting"><span class="header-section-number">6.3</span> Vertical Data Splitting</h2>
-<p>Once loaded, the dataset will be splitted into feature matrix <code>X</code>, and target vector <code>y</code>.</p>
+<p>Once the dataset is loaded, we will split it into a feature matrix <code>X</code> and a target vector <code>y</code>.</p>
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> dataset.iloc[:, :<span class="op">-</span><span class="dv">1</span>].values</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> dataset.iloc[:, <span class="op">-</span><span class="dv">1</span>].values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -388,11 +388,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="horizontal-data-splitting" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="horizontal-data-splitting"><span class="header-section-number">6.4</span> Horizontal Data Splitting</h2>
-<p>Once the feature matrix and target vector was defined, they will be splitted horizontally into training set and testing set. The code below will perform the horizontal split with test size of 20% with ensuring that both sets contains the same proportion of <code>0</code>s and <code>1</code>s on their target variable.</p>
+<p>After defining the feature matrix and target vector, we will split them horizontally into a training set and a testing set. The code below performs the horizontal split with a test size of 20%, ensuring that both sets contain the same proportion of <code>0</code>s and <code>1</code>s in their target variable.</p>
 </section>
 <section id="modelling" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="modelling"><span class="header-section-number">6.5</span> Modelling</h2>
-<p>To compare different models, the yellowbrick datavisualization library was used. This library contains out-of-the-box data visualization tools for comparing different machine learning algorithms implemented in scikit-learn. The class definition below provides an abstraction in comparing different machine learning models. Its constructor accepts a list of estimators, an input feature X, and output variable y. It has a show_classification_report method that returns a data visualization of each of the model’s ROC curve, confusion matrix, and classification report.</p>
+<p>To compare different models, we will use the <code>yellowbrick</code> data visualization library. This library provides out-of-the-box data visualization tools for comparing different machine learning algorithms implemented in <strong>scikit-learn</strong>.</p>
+<p>The class definition below provides an abstraction for comparing different machine learning models. Its constructor accepts a list of estimators, an input feature <code>X</code>, and an output variable <code>y</code>. It has a <code>show_classification_report</code> method that returns a data visualization of each model’s <em>ROC curve</em>, <em>confusion matrix</em>, and <em>classification report</em>.</p>
+<p>To generate these reports, the <code>ClassifierEvaluator</code> class internally splits the input feature <code>X</code> and output variable <code>y</code> into training and testing sets. Each classifier will be trained on the training set. To evaluate the model on unseen data, the score method of yellowbrick visualizers will be called using the testing set.</p>
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ClassifierEvaluator():</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, estimators: <span class="bu">list</span>[ClassifierMixin], X, y) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
@@ -454,7 +456,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="training-the-model" class="level2" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="training-the-model"><span class="header-section-number">6.6</span> Training the Model</h2>
-<p>The code below will train the 5 machine learning models using the preprocessed dataset from <a href="./exploring-data.html">Data Wrangling</a> section.</p>
+<p>The code below will train 5 machine learning models using the preprocessed dataset from the Data Wrangling section.</p>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>evaluator <span class="op">=</span> ClassifierEvaluator(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    estimators<span class="op">=</span>[</span>
@@ -471,7 +473,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="classification-report" class="level2 page-columns page-full" data-number="6.7">
 <h2 data-number="6.7" class="anchored" data-anchor-id="classification-report"><span class="header-section-number">6.7</span> Classification Report</h2>
-<p>The following series of plots below shows the ROC curve, confusion matrix, and classification report of each models. This visualization can be used to compare the performance of each of the model.</p>
+<p>The following series of plots show the ROC curve, confusion matrix, and classification report of each model. This visualization can be used to compare the performance of each model.</p>
 <div class="page-columns page-full">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>evaluator.show_classification_reports()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell column-page quarto-layout-panel" data-execution_count="6">
@@ -480,7 +482,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="modelling_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img" width="1130"></p>
-<figcaption class="figure-caption"><strong>Logistic Regression Model</strong>: <em>Precision (95.3%)</em> - Out of 64 samples that the model predicted to have no cracks on welding joints, 3 of them actually have a crack. <em>Recall (70.00%)</em> - Out of all 10 samples with cracks on welding joint, the model was able to correctly predict 7 of them.</figcaption>
+<figcaption class="figure-caption">The logistic regression model achieved a precision of 95.3%, correctly predicting 61 out of 64 samples that were predicted to have no cracks on welding joints. However, it had a recall of 70.00%, meaning that it only correctly predicted 7 out of 10 samples with cracks.</figcaption>
 </figure>
 </div>
 </div>
@@ -490,7 +492,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="modelling_files/figure-html/cell-7-output-2.png" class="img-fluid figure-img" width="1130"></p>
-<figcaption class="figure-caption"><strong>Decision Tree Model</strong>: <em>Precision (95.3%)</em> - Out of 64 samples that the model predicted to have no cracks on welding joints, 3 of them actually have a crack. <em>Recall (70.00%)</em> - Out of all 10 samples with cracks on welding joint, the model was able to correctly predict 7 of them. Although its recall, and precsion was same with Logistic regression model, since the area-under-curve of its receiver operating curve was lower thank logistic regression model, it has lesser discriminability.</figcaption>
+<figcaption class="figure-caption">Similar to the logistic regression model, the decision tree model also achieved a precision of 95.3% and a recall of 70.00%. However, its area-under-curve (AUC) of the receiver operating curve was lower than the logistic regression model, indicating lower discriminability.</figcaption>
 </figure>
 </div>
 </div>
@@ -500,7 +502,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="modelling_files/figure-html/cell-7-output-3.png" class="img-fluid figure-img" width="1130"></p>
-<figcaption class="figure-caption"><strong>Support Vector Model</strong>: <em>Precision (96.8%)</em> - Out of 62 samples that the model predicted to have no cracks on welding joints, 2 of them actually have a crack. <em>Recall (80.00%)</em> - Out of all 10 samples with cracks on welding joint, the model was able to correctly predict 8 of them. At 0.97 AUC, this model’s discriminability is better than the decision tree model.</figcaption>
+<figcaption class="figure-caption">The support vector model outperformed both the logistic regression and decision tree models with a precision of 96.8% and a recall of 80.00%. It correctly predicted 62 out of 64 samples without cracks and 8 out of 10 samples with cracks. Additionally, it had an AUC of 0.97, indicating better discriminability than the decision tree model.</figcaption>
 </figure>
 </div>
 </div>
@@ -510,7 +512,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="modelling_files/figure-html/cell-7-output-4.png" class="img-fluid figure-img" width="1130"></p>
-<figcaption class="figure-caption"><strong>Gaussian Naive Baye’s</strong>: <em>Precision (100.00%)</em> - Out of 47 samples that the model predicted to have no cracks on welding joints, 0 of them actually have a crack. <em>Recall (100.00%)</em> - Out of all 10 samples with cracks on welding joint, the model was able to correctly predict 10 of them.</figcaption>
+<figcaption class="figure-caption">The Gaussian Naive Bayes model achieved perfect precision and recall, correctly predicting all 47 samples without cracks and all 10 samples with cracks. This indicates that it is a highly accurate model for predicting welding cracks.</figcaption>
 </figure>
 </div>
 </div>
@@ -520,7 +522,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="modelling_files/figure-html/cell-7-output-5.png" class="img-fluid figure-img" width="1132"></p>
-<figcaption class="figure-caption"><strong>K-Nearest-Neighbors Model</strong>: <em>Precision (92.2%)</em> - Out of 64 samples that the model predicted to have no cracks on welding joints, 5 of them actually have a crack. <em>Recall (50%)</em> - Out of all 10 samples with cracks on welding joint, the model was able to correctly predict 5 of them. This is the worse model since its ability to correctly predict welding cracks was almost like tossing a fair coin.</figcaption>
+<figcaption class="figure-caption">The K-Nearest Neighbors model had a precision of 92.2%, correctly predicting 59 out of 64 samples without cracks. However, it had a low recall of 50%, only correctly predicting 5 out of 10 samples with cracks. This indicates that the model’s ability to predict welding cracks is not much better than random chance.</figcaption>
 </figure>
 </div>
 </div>
@@ -528,28 +530,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="model-evaluation" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="model-evaluation"><span class="header-section-number">6.8</span> Model Evaluation</h2>
-<p>Now, let’s analyze each of the model according to their recall rate in decreasing order while considering their impact on cost.</p>
+<section id="evaluating-models-for-detecting-welding-cracks" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="evaluating-models-for-detecting-welding-cracks"><span class="header-section-number">6.8</span> Evaluating Models for Detecting Welding Cracks</h2>
+<p>In this analysis, we evaluate different models based on their recall rate and their impact on cost. We aim to find the most feasible model that balances the trade-off between false positive rate and recall rate.</p>
 <section id="gaussiannb-model" class="level3" data-number="6.8.1">
 <h3 data-number="6.8.1" class="anchored" data-anchor-id="gaussiannb-model"><span class="header-section-number">6.8.1</span> GaussianNB Model</h3>
-<p>If a manufacturing business unit does not tolerate any defect out-flow to the next process, a conservative models very high recall rate could be employed such as the GaussianNB model with 100.00% recall-rate (10/10). However keep in mind that this has trade-off – a high false-positive rate of 24.20% (15/62). If the cost of rework due to false detection of welding cracks outweighs the cost of re-inspection and re-processing due to defect outflow, then this model is not feasible.</p>
+<p>For manufacturing businesses that cannot tolerate any defect outflow, the GaussianNB model with a recall rate of 100.00% (10/10) can be employed. However, it comes with a high false positive rate of 24.20% (15/62). The feasibility of this model depends on whether the cost of rework due to false detection outweighs the cost of re-inspection and re-processing.</p>
 </section>
 <section id="support-vector-classifier" class="level3" data-number="6.8.2">
 <h3 data-number="6.8.2" class="anchored" data-anchor-id="support-vector-classifier"><span class="header-section-number">6.8.2</span> Support Vector Classifier</h3>
-<p>If the business unit allows a compromise (a small rate of defect outflow), while keeping the false-rejection rate at minimum, then the Support Vector Classifier model could be used. Although its recall-rate of 80.00% (8/10) is much smaller than the GaussianNB model, its feasibility can be justified by its low false positive rate of 3.23% (2/62). If the cost of rework due to false detection of welding cracks outweighs the cost of reinspection and reprocessing due to defect outflow, this model is more desirable than GuassianNB.</p>
+<p>The Support Vector Classifier model offers a compromise, allowing a small rate of defect outflow while minimizing the false rejection rate. It has a recall rate of 80.00% (8/10) and a low false positive rate of 3.23% (2/62). If the cost of rework due to false detection is lower than the cost of re-inspection and re-processing, this model is a desirable choice.</p>
 </section>
 <section id="logistic-regression-and-decision-tree" class="level3" data-number="6.8.3">
 <h3 data-number="6.8.3" class="anchored" data-anchor-id="logistic-regression-and-decision-tree"><span class="header-section-number">6.8.3</span> Logistic Regression and Decision Tree</h3>
-<p>These models have low recall rate of 70.00% (7/10), and precision rate of 95.30% (61/64), However, their false positive rate of 1.61% (1/62) were superior against GaussianNB and SVC. Even though these models have superior false positive rate, using them however, bears a significant risk of defect out-flow which might result to poor customer satisfaction.</p>
+<p>Both Logistic Regression and Decision Tree models have a recall rate of 70.00% (7/10) and a precision rate of 95.30% (61/64). They also have a superior false positive rate of 1.61% (1/62) compared to GaussianNB and SVC. However, using these models carries a significant risk of defect outflow, which can result in poor customer satisfaction.</p>
 </section>
 <section id="knn-classifier" class="level3" data-number="6.8.4">
 <h3 data-number="6.8.4" class="anchored" data-anchor-id="knn-classifier"><span class="header-section-number">6.8.4</span> KNN Classifier</h3>
-<p>Out of all of the 5-models, this is the worse performing one with inferior recall rate of 50.00% (5/10), inferior precision rate of 92.2% (59/64), and inferior false positive rate of 4.84% (3/62)</p>
+<p>The KNN Classifier performs the worst among the five models, with a recall rate of 50.00% (5/10), a precision rate of 92.2% (59/64), and a false positive rate of 4.84% (3/62).</p>
 </section>
 <section id="conclusion" class="level3" data-number="6.8.5">
 <h3 data-number="6.8.5" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">6.8.5</span> Conclusion</h3>
-<p>Based on the results of the model evaluation, the most feasible model to be used in terms of balance between false positive rate and recall rate was the support vector classifier. Another notable model with good detection of cracks was the Gaussian Naive Baye’s model, however some work should be done to reduce its false positive rate. On the next phase of this project, we will focus our efforts improving the performance of these two models through feature engineering and hyper-parameter tuning. The last three poor classifiers will be revisited in the Ensembling phase to check if they can help in improving the detection of welding cracks.</p>
+<p>Based on our evaluation, the most feasible model that balances the false positive rate and recall rate is the Support Vector Classifier. The GaussianNB model also shows promise in detecting cracks, but its false positive rate needs improvement. In the next phase of this project, we will focus on improving the performance of these two models through feature engineering and hyper-parameter tuning. The three poor classifiers will be revisited in the Ensembling phase to see if they can contribute to improving the detection of welding cracks.</p>
 
 
 </section>
