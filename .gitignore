@@ -1,3 +1,5 @@
 .env
 prompts/.env
 /.quarto/
+modelling_files
+_book

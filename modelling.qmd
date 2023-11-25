@@ -1,15 +1,14 @@
-# Modelling
-On the [Data Wrangling](exploring-data.qmd) section, it was found that the 6-machine paramaters to be studied were discrete values with three levels each, and the target variable was a highly imbalanced binary variable.
+# Machine Learning Model Comparison
+In the previous section on [Data Wrangling](exploring-data.qmd), it was discovered that the 6 machine parameters to be studied had discrete values with three levels each, and the target variable was a highly imbalanced binary variable.
 
-In this section, the dataset will be fed into different machine learning models to find an optimal model that can help us understand the mapping between the input and output variables. To do this, the dataset should be splitted into two parts namely, the training set, and the testing set with test size of 20%. The training set will be used during model training, and cross validation while the testing set will be used to evaluate the model performance on unseen data.
+In this section, we will feed the dataset into different machine learning models to find the optimal model that can help us understand the relationship between the input and output variables. To do this, we will split the dataset into a training set and a testing set, with a test size of 20%. The training set will be used for model training and cross-validation, while the testing set will be used to evaluate the model's performance on unseen data.
 
-Once the data was splitted, it will be loaded to different out-of-the-box machine learning models from scikit-learn library.
-At this stage, the only goal is to find the optimal model using their default hyperparameters.
+Once the data is split, we will load it into different out-of-the-box machine learning models from the scikit-learn library. At this stage, our goal is to find the optimal model using their default hyperparameters.
 
-Finally, each of the model's training and testing performance will be compared and evaluated. The goal is to shortlist the top performing model.
+Finally, we will compare and evaluate the training and testing performance of each model. The objective is to shortlist the top-performing model.
 
 ## Importing Relevant Libraries
-The following code below contains all of the import statements for this section.
+The following code contains all the necessary import statements for this section.
 
 ```{python}
 # Data Wrangling
@@ -51,7 +50,7 @@ from sklearn.base import ClassifierMixin, TransformerMixin
 
 
 ## Importing the Dataset
-The following code below loads the dataset pre-processed from [EDA](exploring-data.qmd) section into pandas `DataFrame`.
+The code below loads the pre-processed dataset from the EDA section into a pandas DataFrame.
 ```{python}
 dataset_uri = "datasets/V1.csv"
 dataset = pd.read_csv(dataset_uri, index_col=0)
@@ -60,20 +59,24 @@ dataset.head()
 ```
 
 ## Vertical Data Splitting
-Once loaded, the dataset will be splitted into feature matrix `X`, and target vector `y`.
+Once the dataset is loaded, we will split it into a feature matrix `X` and a target vector `y`.
 ```{python}
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
+
+
 ```
 
 ## Horizontal Data Splitting
-Once the feature matrix and target vector was defined, they will be splitted horizontally into training set and testing set.
-The code below will perform the horizontal split with test size of 20% with ensuring that both sets contains the same proportion of `0`s and `1`s on their target variable.
+After defining the feature matrix and target vector, we will split them horizontally into a training set and a testing set. The code below performs the horizontal split with a test size of 20%, ensuring that both sets contain the same proportion of `0`s and `1`s in their target variable.
 
 ## Modelling
-To compare different models, the yellowbrick datavisualization library was used. This library contains out-of-the-box data visualization tools for comparing different machine learning algorithms implemented in scikit-learn.
-The class definition below provides an abstraction in comparing different machine learning models.
-Its constructor accepts a list of estimators, an input feature X, and output variable y. It has a show_classification_report method that returns a data visualization of each of the model's ROC curve, confusion matrix, and classification report.
+To compare different models, we will use the `yellowbrick` data visualization library. This library provides out-of-the-box data visualization tools for comparing different machine learning algorithms implemented in **scikit-learn**.
+
+The class definition below provides an abstraction for comparing different machine learning models. Its constructor accepts a list of estimators, an input feature `X`, and an output variable `y`. It has a `show_classification_report` method that returns a data visualization of each model's *ROC curve*, *confusion matrix*, and *classification report*.
+
+To generate these reports, the `ClassifierEvaluator` class internally splits the input feature `X` and output variable `y` into training and testing sets. Each classifier will be trained on the training set. To evaluate the model on unseen data, the score method of yellowbrick visualizers will be called using the testing set.
+
 ```{python}
 class ClassifierEvaluator():
     def __init__(self, estimators: list[ClassifierMixin], X, y) -> None:
@@ -134,7 +137,7 @@ class ClassifierEvaluator():
 ```
 
 ## Training the Model
-The code below will train the 5 machine learning models using the preprocessed dataset from [Data Wrangling](exploring-data.qmd) section.
+The code below will train 5 machine learning models using the preprocessed dataset from the Data Wrangling section.
 ```{python}
 evaluator = ClassifierEvaluator(
     estimators=[
@@ -150,35 +153,35 @@ evaluator = ClassifierEvaluator(
 ```
 
 ## Classification Report
-The following series of plots below shows the ROC curve, confusion matrix, and classification report of each models.
-This visualization can be used to compare the performance of each of the model.
+The following series of plots show the ROC curve, confusion matrix, and classification report of each model. This visualization can be used to compare the performance of each model.
+
 ```{python}
 # | column: page
 # | layout-nrow: 5
 # | fig-cap:
-# |     - "**Logistic Regression Model**: *Precision (95.3%)* - Out of 64 samples that the model predicted to have no cracks on welding joints, 3 of them actually have a crack. *Recall (70.00%)* - Out of all 10 samples with cracks on welding joint, the model was able to correctly predict 7 of them."
-# |     - "**Decision Tree Model**: *Precision (95.3%)* - Out of 64 samples that the model predicted to have no cracks on welding joints, 3 of them actually have a crack. *Recall (70.00%)* - Out of all 10 samples with cracks on welding joint, the model was able to correctly predict 7 of them. Although its recall, and precsion was same with Logistic regression model, since the area-under-curve of its receiver operating curve was lower thank logistic regression model, it has lesser discriminability. "
-# |     - "**Support Vector Model**: *Precision (96.8%)* - Out of 62 samples that the model predicted to have no cracks on welding joints, 2 of them actually have a crack. *Recall (80.00%)* - Out of all 10 samples with cracks on welding joint, the model was able to correctly predict 8 of them. At 0.97 AUC, this model's discriminability is better than the decision tree model."
-# |     - "**Gaussian Naive Baye's**: *Precision (100.00%)* - Out of 47 samples that the model predicted to have no cracks on welding joints, 0 of them actually have a crack. *Recall (100.00%)* - Out of all 10 samples with cracks on welding joint, the model was able to correctly predict 10 of them."
-# |     - "**K-Nearest-Neighbors Model**: *Precision (92.2%)* - Out of 64 samples that the model predicted to have no cracks on welding joints, 5 of them actually have a crack. *Recall (50%)* - Out of all 10 samples with cracks on welding joint, the model was able to correctly predict 5 of them. This is the worse model since its ability to correctly predict welding cracks was almost like tossing a fair coin."
+# |     - "The logistic regression model achieved a precision of 95.3%, correctly predicting 61 out of 64 samples that were predicted to have no cracks on welding joints. However, it had a recall of 70.00%, meaning that it only correctly predicted 7 out of 10 samples with cracks."
+# |     - "Similar to the logistic regression model, the decision tree model also achieved a precision of 95.3% and a recall of 70.00%. However, its area-under-curve (AUC) of the receiver operating curve was lower than the logistic regression model, indicating lower discriminability."
+# |     - "The support vector model outperformed both the logistic regression and decision tree models with a precision of 96.8% and a recall of 80.00%. It correctly predicted 62 out of 64 samples without cracks and 8 out of 10 samples with cracks. Additionally, it had an AUC of 0.97, indicating better discriminability than the decision tree model."
+# |     - "The Gaussian Naive Bayes model achieved perfect precision and recall, correctly predicting all 47 samples without cracks and all 10 samples with cracks. This indicates that it is a highly accurate model for predicting welding cracks."
+# |     - "The K-Nearest Neighbors model had a precision of 92.2%, correctly predicting 59 out of 64 samples without cracks. However, it had a low recall of 50%, only correctly predicting 5 out of 10 samples with cracks. This indicates that the model's ability to predict welding cracks is not much better than random chance."
 
 evaluator.show_classification_reports()
 ```
 
-## Model Evaluation
-Now, let's analyze each of the model according to their recall rate in decreasing order while considering their impact on cost.
+## Evaluating Models for Detecting Welding Cracks
+In this analysis, we evaluate different models based on their recall rate and their impact on cost. We aim to find the most feasible model that balances the trade-off between false positive rate and recall rate.
 
 ### GaussianNB Model
-If a manufacturing business unit does not tolerate any defect out-flow to the next process, a conservative models very high recall rate could be employed such as the GaussianNB model with 100.00% recall-rate (10/10). However keep in mind that this has trade-off -- a high false-positive rate of 24.20% (15/62). If the cost of rework due to false detection of welding cracks outweighs the cost of re-inspection and re-processing due to defect outflow, then this model is not feasible.
+For manufacturing businesses that cannot tolerate any defect outflow, the GaussianNB model with a recall rate of 100.00% (10/10) can be employed. However, it comes with a high false positive rate of 24.20% (15/62). The feasibility of this model depends on whether the cost of rework due to false detection outweighs the cost of re-inspection and re-processing.
 
 ### Support Vector Classifier
-If the business unit allows a compromise (a small rate of defect outflow), while keeping the false-rejection rate at minimum, then the Support Vector Classifier model could be used. Although its recall-rate of 80.00% (8/10) is much smaller than the GaussianNB model, its feasibility can be justified by its low false positive rate of 3.23% (2/62). If the cost of rework due to false detection of welding cracks outweighs the cost of reinspection and reprocessing due to defect outflow, this model is more desirable than GuassianNB.
+The Support Vector Classifier model offers a compromise, allowing a small rate of defect outflow while minimizing the false rejection rate. It has a recall rate of 80.00% (8/10) and a low false positive rate of 3.23% (2/62). If the cost of rework due to false detection is lower than the cost of re-inspection and re-processing, this model is a desirable choice.
 
 ### Logistic Regression and Decision Tree
-These models have low recall rate of 70.00% (7/10), and precision rate of 95.30% (61/64), However, their false positive rate of 1.61% (1/62) were superior against GaussianNB and SVC. Even though these models have superior false positive rate, using them however, bears a significant risk of defect out-flow which might result to poor customer satisfaction.
+Both Logistic Regression and Decision Tree models have a recall rate of 70.00% (7/10) and a precision rate of 95.30% (61/64). They also have a superior false positive rate of 1.61% (1/62) compared to GaussianNB and SVC. However, using these models carries a significant risk of defect outflow, which can result in poor customer satisfaction.
 
 ### KNN Classifier
-Out of all of the 5-models, this is the worse performing one with inferior recall rate of 50.00% (5/10), inferior precision rate of 92.2% (59/64), and inferior false positive rate of 4.84% (3/62)
+The KNN Classifier performs the worst among the five models, with a recall rate of 50.00% (5/10), a precision rate of 92.2% (59/64), and a false positive rate of 4.84% (3/62).
 
 ### Conclusion
-Based on the results of the model evaluation, the most feasible model to be used in terms of balance between false positive rate and recall rate was the support vector classifier. Another notable model with good detection of cracks was the Gaussian Naive Baye's model, however some work should be done to reduce its false positive rate. On the next phase of this project, we will focus our efforts improving the performance of these two models through feature engineering and hyper-parameter tuning. The last three poor classifiers will be revisited in the Ensembling phase to check if they can help in improving the detection of welding cracks.
+Based on our evaluation, the most feasible model that balances the false positive rate and recall rate is the Support Vector Classifier. The GaussianNB model also shows promise in detecting cracks, but its false positive rate needs improvement. In the next phase of this project, we will focus on improving the performance of these two models through feature engineering and hyper-parameter tuning. The three poor classifiers will be revisited in the Ensembling phase to see if they can contribute to improving the detection of welding cracks.
