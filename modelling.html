@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Optimizing Laser Welded Steel-copper Lap Joints - 6&nbsp; Machine Learning Model Comparison</title>
+<title>Optimizing Laser Welded Steel-copper Lap Joints - 6&nbsp; Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./summary.html" rel="next">
+<link href="./class-balance.html" rel="next">
 <link href="./exploring-data.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -111,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modelling.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Machine Learning Model Comparison</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modelling.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modelling</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -175,13 +175,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Machine Learning Model Comparison</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modelling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./class-balance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Oversampling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -204,26 +210,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#importing-the-dataset" id="toc-importing-the-dataset" class="nav-link" data-scroll-target="#importing-the-dataset"><span class="header-section-number">6.2</span> Importing the Dataset</a></li>
   <li><a href="#vertical-data-splitting" id="toc-vertical-data-splitting" class="nav-link" data-scroll-target="#vertical-data-splitting"><span class="header-section-number">6.3</span> Vertical Data Splitting</a></li>
   <li><a href="#horizontal-data-splitting" id="toc-horizontal-data-splitting" class="nav-link" data-scroll-target="#horizontal-data-splitting"><span class="header-section-number">6.4</span> Horizontal Data Splitting</a></li>
-  <li><a href="#modelling" id="toc-modelling" class="nav-link" data-scroll-target="#modelling"><span class="header-section-number">6.5</span> Modelling</a></li>
-  <li><a href="#training-the-model" id="toc-training-the-model" class="nav-link" data-scroll-target="#training-the-model"><span class="header-section-number">6.6</span> Training the Model</a></li>
-  <li><a href="#classification-report" id="toc-classification-report" class="nav-link" data-scroll-target="#classification-report"><span class="header-section-number">6.7</span> Classification Report</a></li>
-  <li><a href="#evaluating-models-for-detecting-welding-cracks" id="toc-evaluating-models-for-detecting-welding-cracks" class="nav-link" data-scroll-target="#evaluating-models-for-detecting-welding-cracks"><span class="header-section-number">6.8</span> Evaluating Models for Detecting Welding Cracks</a>
+  <li><a href="#training-the-model" id="toc-training-the-model" class="nav-link" data-scroll-target="#training-the-model"><span class="header-section-number">6.5</span> Training the Model</a></li>
+  <li><a href="#baseline-cross-validation-validation-metrics" id="toc-baseline-cross-validation-validation-metrics" class="nav-link" data-scroll-target="#baseline-cross-validation-validation-metrics"><span class="header-section-number">6.6</span> Baseline Cross-validation Validation Metrics</a>
   <ul class="collapse">
-  <li><a href="#gaussiannb-model" id="toc-gaussiannb-model" class="nav-link" data-scroll-target="#gaussiannb-model"><span class="header-section-number">6.8.1</span> GaussianNB Model</a></li>
-  <li><a href="#support-vector-classifier" id="toc-support-vector-classifier" class="nav-link" data-scroll-target="#support-vector-classifier"><span class="header-section-number">6.8.2</span> Support Vector Classifier</a></li>
-  <li><a href="#logistic-regression-and-decision-tree" id="toc-logistic-regression-and-decision-tree" class="nav-link" data-scroll-target="#logistic-regression-and-decision-tree"><span class="header-section-number">6.8.3</span> Logistic Regression and Decision Tree</a></li>
-  <li><a href="#knn-classifier" id="toc-knn-classifier" class="nav-link" data-scroll-target="#knn-classifier"><span class="header-section-number">6.8.4</span> KNN Classifier</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">6.8.5</span> Conclusion</a></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">6.6.1</span> Logistic Regression</a></li>
+  <li><a href="#decision-tree-classifier" id="toc-decision-tree-classifier" class="nav-link" data-scroll-target="#decision-tree-classifier"><span class="header-section-number">6.6.2</span> Decision Tree Classifier</a></li>
+  <li><a href="#support-vector-classifier" id="toc-support-vector-classifier" class="nav-link" data-scroll-target="#support-vector-classifier"><span class="header-section-number">6.6.3</span> Support Vector Classifier</a></li>
+  <li><a href="#gaussian-naive-bayes" id="toc-gaussian-naive-bayes" class="nav-link" data-scroll-target="#gaussian-naive-bayes"><span class="header-section-number">6.6.4</span> Gaussian Naive Bayes</a></li>
+  <li><a href="#k-neighbors-classifier" id="toc-k-neighbors-classifier" class="nav-link" data-scroll-target="#k-neighbors-classifier"><span class="header-section-number">6.6.5</span> K-Neighbors Classifier</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Machine Learning Model Comparison</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modelling</span></h1>
 </div>
 
 
@@ -255,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataset Splitting</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, cross_validate</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature Engineering Classes</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer</span>
@@ -268,19 +272,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> GaussianNB</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> (</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    RandomForestClassifier,</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    VotingClassifier,</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    BaggingClassifier,</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    AdaBoostClassifier,</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    StackingClassifier</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Classification Visualization</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> yellowbrick.classifier <span class="im">import</span> ConfusionMatrix, ClassificationReport, ROCAUC</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Base Classes</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.base <span class="im">import</span> ClassifierMixin, TransformerMixin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Classification Metrics</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Classification Visualization</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> yellowbrick.classifier <span class="im">import</span> ConfusionMatrix, ClassificationReport, ROCAUC</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Base Classes</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.base <span class="im">import</span> ClassifierMixin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="importing-the-dataset" class="level2" data-number="6.2">
@@ -380,83 +380,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="vertical-data-splitting" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="vertical-data-splitting"><span class="header-section-number">6.3</span> Vertical Data Splitting</h2>
-<p>Once the dataset is loaded, we will split it into a feature matrix <code>X</code> and a target vector <code>y</code>.</p>
+<p>Once the dataset is loaded, we will split it into a feature matrix <code>X</code> and a target vector <code>y</code>. <code>X_train</code> and <code>y_train</code> will be soon splitted into <code>X_train</code> &amp; <code>X_cv</code>, and <code>y_train</code> &amp; <code>y_cv</code> during model selection.</p>
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> dataset.iloc[:, :<span class="op">-</span><span class="dv">1</span>].values</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> dataset.iloc[:, <span class="op">-</span><span class="dv">1</span>].values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> dataset.iloc[:, <span class="op">-</span><span class="dv">1</span>].values</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">22</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="horizontal-data-splitting" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="horizontal-data-splitting"><span class="header-section-number">6.4</span> Horizontal Data Splitting</h2>
 <p>After defining the feature matrix and target vector, we will split them horizontally into a training set and a testing set. The code below performs the horizontal split with a test size of 20%, ensuring that both sets contain the same proportion of <code>0</code>s and <code>1</code>s in their target variable.</p>
 </section>
-<section id="modelling" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="modelling"><span class="header-section-number">6.5</span> Modelling</h2>
-<p>To compare different models, we will use the <code>yellowbrick</code> data visualization library. This library provides out-of-the-box data visualization tools for comparing different machine learning algorithms implemented in <strong>scikit-learn</strong>.</p>
-<p>The class definition below provides an abstraction for comparing different machine learning models. Its constructor accepts a list of estimators, an input feature <code>X</code>, and an output variable <code>y</code>. It has a <code>show_classification_report</code> method that returns a data visualization of each model’s <em>ROC curve</em>, <em>confusion matrix</em>, and <em>classification report</em>.</p>
-<p>To generate these reports, the <code>ClassifierEvaluator</code> class internally splits the input feature <code>X</code> and output variable <code>y</code> into training and testing sets. Each classifier will be trained on the training set. To evaluate the model on unseen data, the score method of yellowbrick visualizers will be called using the testing set.</p>
+<section id="training-the-model" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="training-the-model"><span class="header-section-number">6.5</span> Training the Model</h2>
+<p>The code below will train 5 machine learning models using the preprocessed dataset from the Data Wrangling section.</p>
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ClassifierEvaluator():</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, estimators: <span class="bu">list</span>[ClassifierMixin], X, y) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.X_train, <span class="va">self</span>.X_test, <span class="va">self</span>.y_train, <span class="va">self</span>.y_test <span class="op">=</span> train_test_split(</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            X,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            y,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            stratify<span class="op">=</span>y,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>            random_state<span class="op">=</span><span class="dv">22</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estimators <span class="op">=</span> estimators</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> show_classification_reports(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> estimator <span class="kw">in</span> <span class="va">self</span>.estimators:</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>            name <span class="op">=</span> <span class="bu">type</span>(estimator).<span class="va">__name__</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>            pipeline <span class="op">=</span> Pipeline(</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                steps<span class="op">=</span>[</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                    (<span class="st">"std_scaler"</span>, StandardScaler()),</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>                    (<span class="st">"classifier"</span>, estimator)</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>                ]</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>            pipeline.target_type_ <span class="op">=</span> <span class="st">'binary'</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Plot The Report</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>            fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">3</span>)</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>            fig.set_size_inches(<span class="dv">12</span>,<span class="dv">6</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, estimators: <span class="bu">list</span>[ClassifierMixin]) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estimators <span class="op">=</span> estimators</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> cross_validate_metrics(<span class="va">self</span>, X, y) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        scorings <span class="op">=</span> [<span class="st">'accuracy'</span>, <span class="st">'precision'</span>, <span class="st">'recall'</span>, <span class="st">'f1'</span>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> estimator <span class="kw">in</span> <span class="va">self</span>.estimators:</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            name <span class="op">=</span> <span class="bu">type</span>(estimator).<span class="va">__name__</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>            pipeline <span class="op">=</span> Pipeline(</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                steps<span class="op">=</span>[</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                    (<span class="st">"std_scaler"</span>, StandardScaler()),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                    (<span class="st">"classifier"</span>, estimator)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                ]</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>            metrics <span class="op">=</span> pd.DataFrame(cross_validate(pipeline, X, y, cv<span class="op">=</span><span class="dv">10</span>, scoring<span class="op">=</span>scorings))</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            metrics_viz <span class="op">=</span> sns.stripplot(metrics.iloc[:, <span class="dv">2</span>:]).<span class="bu">set</span>(title<span class="op">=</span>name)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>            metrics_viz <span class="op">=</span> sns.violinplot(metrics.iloc[:, <span class="dv">2</span>:], alpha<span class="op">=</span><span class="fl">0.1</span>).<span class="bu">set</span>(title<span class="op">=</span>name)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>            plt.ylim([<span class="dv">0</span>,<span class="fl">1.0</span>])</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>            plt.show()</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> tabulate_cross_validation_metrics(<span class="va">self</span>, X, y) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        scorings <span class="op">=</span> [<span class="st">'accuracy'</span>, <span class="st">'precision'</span>, <span class="st">'recall'</span>, <span class="st">'f1'</span>]</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>            roc <span class="op">=</span> ROCAUC(pipeline, ax<span class="op">=</span>axes[<span class="dv">0</span>], binary<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>            cm <span class="op">=</span> ConfusionMatrix(pipeline, ax<span class="op">=</span>axes[<span class="dv">1</span>], classes<span class="op">=</span>[<span class="st">"No Crack"</span>, <span class="st">"Crack"</span>])</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>            cr <span class="op">=</span> ClassificationReport(pipeline, support<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">2</span>], classes<span class="op">=</span>[<span class="st">"Crack"</span>, <span class="st">"No Crack"</span>])</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Fit the model and the visualizers on the training data</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>            roc.fit(<span class="va">self</span>.X_train, <span class="va">self</span>.y_train)</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>            cm.fit (<span class="va">self</span>.X_train, <span class="va">self</span>.y_train)</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>            cr.fit (<span class="va">self</span>.X_train, <span class="va">self</span>.y_train)</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Score and show the visualizers on the test data</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>            roc.score(<span class="va">self</span>.X_test, <span class="va">self</span>.y_test)<span class="op">;</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>            cm.score (<span class="va">self</span>.X_test, <span class="va">self</span>.y_test)<span class="op">;</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>            cr.score (<span class="va">self</span>.X_test, <span class="va">self</span>.y_test)<span class="op">;</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> estimator <span class="kw">in</span> <span class="va">self</span>.estimators:</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>            name <span class="op">=</span> <span class="bu">type</span>(estimator).<span class="va">__name__</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>            pipeline <span class="op">=</span> Pipeline(</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>                steps<span class="op">=</span>[</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>                    (<span class="st">"std_scaler"</span>, StandardScaler()),</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>                    (<span class="st">"classifier"</span>, estimator)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>                ]</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>            metrics <span class="op">=</span> pd.DataFrame(cross_validate(pipeline, X, y, cv<span class="op">=</span><span class="dv">10</span>, scoring<span class="op">=</span>scorings))</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>            metrics[<span class="st">"Model"</span>] <span class="op">=</span> name</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>            df <span class="op">=</span> pd.concat([df, metrics])</span>
 <span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>            fig.suptitle(<span class="ss">f"</span><span class="sc">{</span><span class="bu">type</span>(estimator)<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>            axes[<span class="dv">0</span>].set_title(<span class="ss">f"</span><span class="sc">{</span><span class="bu">type</span>(roc)<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>            axes[<span class="dv">1</span>].set_title(<span class="ss">f"</span><span class="sc">{</span><span class="bu">type</span>(cm)<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>            axes[<span class="dv">2</span>].set_title(<span class="ss">f"</span><span class="sc">{</span><span class="bu">type</span>(cr)<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>            axes[<span class="dv">1</span>].set_xlabel(<span class="st">"Prediction"</span>)</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>            axes[<span class="dv">1</span>].set_ylabel(<span class="st">"Actual"</span>)</span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>            axes[<span class="dv">2</span>].set_xlabel(<span class="st">"Prediction"</span>)</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>            axes[<span class="dv">2</span>].set_ylabel(<span class="st">"Actual"</span>)</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>            axes[<span class="dv">0</span>].legend()<span class="op">;</span></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>            plt.tight_layout()</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>            plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="training-the-model" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="training-the-model"><span class="header-section-number">6.6</span> Training the Model</h2>
-<p>The code below will train 5 machine learning models using the preprocessed dataset from the Data Wrangling section.</p>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>evaluator <span class="op">=</span> ClassifierEvaluator(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    estimators<span class="op">=</span>[</span>
@@ -466,92 +455,534 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        GaussianNB(),</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        KNeighborsClassifier()</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>X,</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>y</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="classification-report" class="level2 page-columns page-full" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="classification-report"><span class="header-section-number">6.7</span> Classification Report</h2>
-<p>The following series of plots show the ROC curve, confusion matrix, and classification report of each model. This visualization can be used to compare the performance of each model.</p>
-<div class="page-columns page-full">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>evaluator.show_classification_reports()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell column-page quarto-layout-panel" data-execution_count="6">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="modelling_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img" width="1130"></p>
-<figcaption class="figure-caption">The logistic regression model achieved a precision of 95.3%, correctly predicting 61 out of 64 samples that were predicted to have no cracks on welding joints. However, it had a recall of 70.00%, meaning that it only correctly predicted 7 out of 10 samples with cracks.</figcaption>
-</figure>
+<section id="baseline-cross-validation-validation-metrics" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="baseline-cross-validation-validation-metrics"><span class="header-section-number">6.6</span> Baseline Cross-validation Validation Metrics</h2>
+<p>The following series of plots below shows the strip-plot and violin plot of each of the model’s accuracy, f1, recall, and precision rates measured during 10-fold cross validation on the training set.</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>evaluator.cross_validate_metrics(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="modelling_files/figure-html/cell-7-output-1.png" width="642" height="467"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="modelling_files/figure-html/cell-7-output-2.png" width="642" height="467"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="modelling_files/figure-html/cell-7-output-3.png" width="642" height="467"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="modelling_files/figure-html/cell-7-output-4.png" width="642" height="467"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="modelling_files/figure-html/cell-7-output-5.png" width="642" height="467"></p>
 </div>
 </div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>UNBAL_results <span class="op">=</span> evaluator.tabulate_cross_validation_metrics(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="modelling_files/figure-html/cell-7-output-2.png" class="img-fluid figure-img" width="1130"></p>
-<figcaption class="figure-caption">Similar to the logistic regression model, the decision tree model also achieved a precision of 95.3% and a recall of 70.00%. However, its area-under-curve (AUC) of the receiver operating curve was lower than the logistic regression model, indicating lower discriminability.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="modelling_files/figure-html/cell-7-output-3.png" class="img-fluid figure-img" width="1130"></p>
-<figcaption class="figure-caption">The support vector model outperformed both the logistic regression and decision tree models with a precision of 96.8% and a recall of 80.00%. It correctly predicted 62 out of 64 samples without cracks and 8 out of 10 samples with cracks. Additionally, it had an AUC of 0.97, indicating better discriminability than the decision tree model.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="modelling_files/figure-html/cell-7-output-4.png" class="img-fluid figure-img" width="1130"></p>
-<figcaption class="figure-caption">The Gaussian Naive Bayes model achieved perfect precision and recall, correctly predicting all 47 samples without cracks and all 10 samples with cracks. This indicates that it is a highly accurate model for predicting welding cracks.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="modelling_files/figure-html/cell-7-output-5.png" class="img-fluid figure-img" width="1132"></p>
-<figcaption class="figure-caption">The K-Nearest Neighbors model had a precision of 92.2%, correctly predicting 59 out of 64 samples without cracks. However, it had a low recall of 50%, only correctly predicting 5 out of 10 samples with cracks. This indicates that the model’s ability to predict welding cracks is not much better than random chance.</figcaption>
-</figure>
-</div>
-</div>
+<section id="logistic-regression" class="level3" data-number="6.6.1">
+<h3 data-number="6.6.1" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">6.6.1</span> Logistic Regression</h3>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>UNBAL_results[UNBAL_results[<span class="st">"Model"</span>] <span class="op">==</span> <span class="st">"LogisticRegression"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">fit_time</th>
+<th data-quarto-table-cell-role="th">score_time</th>
+<th data-quarto-table-cell-role="th">test_accuracy</th>
+<th data-quarto-table-cell-role="th">test_precision</th>
+<th data-quarto-table-cell-role="th">test_recall</th>
+<th data-quarto-table-cell-role="th">test_f1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>0.003309</td>
+<td>0.005547</td>
+<td>0.941133</td>
+<td>0.891667</td>
+<td>0.700000</td>
+<td>0.762143</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>0.000478</td>
+<td>0.000598</td>
+<td>0.016264</td>
+<td>0.141912</td>
+<td>0.158114</td>
+<td>0.079090</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>0.003000</td>
+<td>0.004971</td>
+<td>0.931034</td>
+<td>0.666667</td>
+<td>0.500000</td>
+<td>0.666667</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>0.003004</td>
+<td>0.005000</td>
+<td>0.931034</td>
+<td>0.750000</td>
+<td>0.562500</td>
+<td>0.687500</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>0.003023</td>
+<td>0.005495</td>
+<td>0.931034</td>
+<td>1.000000</td>
+<td>0.750000</td>
+<td>0.750000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>0.003733</td>
+<td>0.006003</td>
+<td>0.955973</td>
+<td>1.000000</td>
+<td>0.750000</td>
+<td>0.842857</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>0.004026</td>
+<td>0.006482</td>
+<td>0.965517</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>0.857143</td>
+</tr>
+</tbody>
+</table>
+
 </div>
 </div>
 </div>
 </section>
-<section id="evaluating-models-for-detecting-welding-cracks" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="evaluating-models-for-detecting-welding-cracks"><span class="header-section-number">6.8</span> Evaluating Models for Detecting Welding Cracks</h2>
-<p>In this analysis, we evaluate different models based on their recall rate and their impact on cost. We aim to find the most feasible model that balances the trade-off between false positive rate and recall rate.</p>
-<section id="gaussiannb-model" class="level3" data-number="6.8.1">
-<h3 data-number="6.8.1" class="anchored" data-anchor-id="gaussiannb-model"><span class="header-section-number">6.8.1</span> GaussianNB Model</h3>
-<p>For manufacturing businesses that cannot tolerate any defect outflow, the GaussianNB model with a recall rate of 100.00% (10/10) can be employed. However, it comes with a high false positive rate of 24.20% (15/62). The feasibility of this model depends on whether the cost of rework due to false detection outweighs the cost of re-inspection and re-processing.</p>
+<section id="decision-tree-classifier" class="level3" data-number="6.6.2">
+<h3 data-number="6.6.2" class="anchored" data-anchor-id="decision-tree-classifier"><span class="header-section-number">6.6.2</span> Decision Tree Classifier</h3>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>UNBAL_results[UNBAL_results[<span class="st">"Model"</span>] <span class="op">==</span> <span class="st">"DecisionTreeClassifier"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">fit_time</th>
+<th data-quarto-table-cell-role="th">score_time</th>
+<th data-quarto-table-cell-role="th">test_accuracy</th>
+<th data-quarto-table-cell-role="th">test_precision</th>
+<th data-quarto-table-cell-role="th">test_recall</th>
+<th data-quarto-table-cell-role="th">test_f1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>0.001198</td>
+<td>0.005907</td>
+<td>0.948276</td>
+<td>0.833333</td>
+<td>0.800000</td>
+<td>0.800476</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>0.000424</td>
+<td>0.000878</td>
+<td>0.052042</td>
+<td>0.222222</td>
+<td>0.258199</td>
+<td>0.220497</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>0.000967</td>
+<td>0.004999</td>
+<td>0.862069</td>
+<td>0.500000</td>
+<td>0.250000</td>
+<td>0.333333</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>0.001000</td>
+<td>0.005259</td>
+<td>0.931034</td>
+<td>0.666667</td>
+<td>0.750000</td>
+<td>0.800000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>0.001002</td>
+<td>0.005998</td>
+<td>0.965517</td>
+<td>1.000000</td>
+<td>0.875000</td>
+<td>0.857143</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>0.001003</td>
+<td>0.006004</td>
+<td>0.991379</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>0.964286</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>0.002002</td>
+<td>0.008012</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </section>
-<section id="support-vector-classifier" class="level3" data-number="6.8.2">
-<h3 data-number="6.8.2" class="anchored" data-anchor-id="support-vector-classifier"><span class="header-section-number">6.8.2</span> Support Vector Classifier</h3>
-<p>The Support Vector Classifier model offers a compromise, allowing a small rate of defect outflow while minimizing the false rejection rate. It has a recall rate of 80.00% (8/10) and a low false positive rate of 3.23% (2/62). If the cost of rework due to false detection is lower than the cost of re-inspection and re-processing, this model is a desirable choice.</p>
+<section id="support-vector-classifier" class="level3" data-number="6.6.3">
+<h3 data-number="6.6.3" class="anchored" data-anchor-id="support-vector-classifier"><span class="header-section-number">6.6.3</span> Support Vector Classifier</h3>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>UNBAL_results[UNBAL_results[<span class="st">"Model"</span>] <span class="op">==</span> <span class="st">"SVC"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">fit_time</th>
+<th data-quarto-table-cell-role="th">score_time</th>
+<th data-quarto-table-cell-role="th">test_accuracy</th>
+<th data-quarto-table-cell-role="th">test_precision</th>
+<th data-quarto-table-cell-role="th">test_recall</th>
+<th data-quarto-table-cell-role="th">test_f1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>0.002217</td>
+<td>0.006185</td>
+<td>0.958621</td>
+<td>0.818810</td>
+<td>0.950000</td>
+<td>0.872172</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>0.000404</td>
+<td>0.000866</td>
+<td>0.042389</td>
+<td>0.172879</td>
+<td>0.105409</td>
+<td>0.128790</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>0.001986</td>
+<td>0.005022</td>
+<td>0.896552</td>
+<td>0.571429</td>
+<td>0.750000</td>
+<td>0.666667</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>0.002001</td>
+<td>0.005990</td>
+<td>0.931034</td>
+<td>0.687500</td>
+<td>1.000000</td>
+<td>0.762500</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>0.002015</td>
+<td>0.005999</td>
+<td>0.965517</td>
+<td>0.800000</td>
+<td>1.000000</td>
+<td>0.888889</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>0.002134</td>
+<td>0.006736</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>0.002978</td>
+<td>0.007806</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </section>
-<section id="logistic-regression-and-decision-tree" class="level3" data-number="6.8.3">
-<h3 data-number="6.8.3" class="anchored" data-anchor-id="logistic-regression-and-decision-tree"><span class="header-section-number">6.8.3</span> Logistic Regression and Decision Tree</h3>
-<p>Both Logistic Regression and Decision Tree models have a recall rate of 70.00% (7/10) and a precision rate of 95.30% (61/64). They also have a superior false positive rate of 1.61% (1/62) compared to GaussianNB and SVC. However, using these models carries a significant risk of defect outflow, which can result in poor customer satisfaction.</p>
+<section id="gaussian-naive-bayes" class="level3" data-number="6.6.4">
+<h3 data-number="6.6.4" class="anchored" data-anchor-id="gaussian-naive-bayes"><span class="header-section-number">6.6.4</span> Gaussian Naive Bayes</h3>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>UNBAL_results[UNBAL_results[<span class="st">"Model"</span>] <span class="op">==</span> <span class="st">"GaussianNB"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">fit_time</th>
+<th data-quarto-table-cell-role="th">score_time</th>
+<th data-quarto-table-cell-role="th">test_accuracy</th>
+<th data-quarto-table-cell-role="th">test_precision</th>
+<th data-quarto-table-cell-role="th">test_recall</th>
+<th data-quarto-table-cell-role="th">test_f1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.0</td>
+<td>10.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>0.001303</td>
+<td>0.005530</td>
+<td>0.739655</td>
+<td>0.353948</td>
+<td>1.0</td>
+<td>0.521053</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>0.000479</td>
+<td>0.000497</td>
+<td>0.054213</td>
+<td>0.049893</td>
+<td>0.0</td>
+<td>0.053877</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>0.000988</td>
+<td>0.004991</td>
+<td>0.655172</td>
+<td>0.285714</td>
+<td>1.0</td>
+<td>0.444444</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>0.001000</td>
+<td>0.005003</td>
+<td>0.695813</td>
+<td>0.314103</td>
+<td>1.0</td>
+<td>0.477941</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>0.001012</td>
+<td>0.005661</td>
+<td>0.741379</td>
+<td>0.348485</td>
+<td>1.0</td>
+<td>0.516667</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>0.001748</td>
+<td>0.005994</td>
+<td>0.778941</td>
+<td>0.390909</td>
+<td>1.0</td>
+<td>0.561905</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>0.002001</td>
+<td>0.006000</td>
+<td>0.827586</td>
+<td>0.444444</td>
+<td>1.0</td>
+<td>0.615385</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </section>
-<section id="knn-classifier" class="level3" data-number="6.8.4">
-<h3 data-number="6.8.4" class="anchored" data-anchor-id="knn-classifier"><span class="header-section-number">6.8.4</span> KNN Classifier</h3>
-<p>The KNN Classifier performs the worst among the five models, with a recall rate of 50.00% (5/10), a precision rate of 92.2% (59/64), and a false positive rate of 4.84% (3/62).</p>
-</section>
-<section id="conclusion" class="level3" data-number="6.8.5">
-<h3 data-number="6.8.5" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">6.8.5</span> Conclusion</h3>
-<p>Based on our evaluation, the most feasible model that balances the false positive rate and recall rate is the Support Vector Classifier. The GaussianNB model also shows promise in detecting cracks, but its false positive rate needs improvement. In the next phase of this project, we will focus on improving the performance of these two models through feature engineering and hyper-parameter tuning. The three poor classifiers will be revisited in the Ensembling phase to see if they can contribute to improving the detection of welding cracks.</p>
+<section id="k-neighbors-classifier" class="level3" data-number="6.6.5">
+<h3 data-number="6.6.5" class="anchored" data-anchor-id="k-neighbors-classifier"><span class="header-section-number">6.6.5</span> K-Neighbors Classifier</h3>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>UNBAL_results[UNBAL_results[<span class="st">"Model"</span>] <span class="op">==</span> <span class="st">"KNeighborsClassifier"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">fit_time</th>
+<th data-quarto-table-cell-role="th">score_time</th>
+<th data-quarto-table-cell-role="th">test_accuracy</th>
+<th data-quarto-table-cell-role="th">test_precision</th>
+<th data-quarto-table-cell-role="th">test_recall</th>
+<th data-quarto-table-cell-role="th">test_f1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+<td>10.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>0.001702</td>
+<td>0.007617</td>
+<td>0.955172</td>
+<td>0.829286</td>
+<td>0.925000</td>
+<td>0.861724</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>0.000484</td>
+<td>0.000533</td>
+<td>0.046120</td>
+<td>0.193911</td>
+<td>0.120761</td>
+<td>0.134958</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>0.001000</td>
+<td>0.006996</td>
+<td>0.896552</td>
+<td>0.571429</td>
+<td>0.750000</td>
+<td>0.666667</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>0.001253</td>
+<td>0.007001</td>
+<td>0.905172</td>
+<td>0.637500</td>
+<td>0.812500</td>
+<td>0.732955</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>0.002002</td>
+<td>0.007983</td>
+<td>0.965517</td>
+<td>0.900000</td>
+<td>1.000000</td>
+<td>0.873016</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>0.002002</td>
+<td>0.008008</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>0.002007</td>
+<td>0.008172</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Based on the analysis of mean and standard deviation, the models that perform well are LogisticRegression, SVC, and KNeighborsClassifier. These models have relatively high mean accuracy, precision, recall, and F1 score, with low variability (standard deviation). On the other hand, DecisionTreeClassifier and GaussianNB have higher variability and lower mean values, indicating poorer performance.</p>
+<p>In addition, when comparing the cross validation metrics, it is evident that LogisticRegression, SVC, and KNeighborsClassifier are good models due to their high mean values and low variability.</p>
 
 
 </section>
@@ -798,8 +1229,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./summary.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./class-balance.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Oversampling</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

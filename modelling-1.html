@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Optimizing Laser Welded Steel-copper Lap Joints - 4&nbsp; Retrieving the Dataset</title>
+<title>Optimizing Laser Welded Steel-copper Lap Joints - 7&nbsp; Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -54,26 +54,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -83,8 +64,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./exploring-data.html" rel="next">
-<link href="./project_overview.html" rel="prev">
+<link href="./summary.html" rel="next">
+<link href="./modelling.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -114,6 +95,9 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -127,7 +111,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./retrieving-data.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Retrieving the Dataset</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modelling-1.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modelling</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -178,7 +162,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./retrieving-data.html" class="sidebar-item-text sidebar-link active">
+  <a href="./retrieving-data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Retrieving the Dataset</span></span></a>
   </div>
 </li>
@@ -196,8 +180,8 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./class-balance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Oversampling</span></span></a>
+  <a href="./modelling-1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modelling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -222,7 +206,9 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#downloading-the-dataset" id="toc-downloading-the-dataset" class="nav-link active" data-scroll-target="#downloading-the-dataset"><span class="header-section-number">4.1</span> Downloading the Dataset</a></li>
+  <li><a href="#loading-the-dataset" id="toc-loading-the-dataset" class="nav-link active" data-scroll-target="#loading-the-dataset"><span class="header-section-number">7.1</span> Loading the Dataset</a></li>
+  <li><a href="#splitting-the-dataset" id="toc-splitting-the-dataset" class="nav-link" data-scroll-target="#splitting-the-dataset"><span class="header-section-number">7.2</span> Splitting the Dataset</a></li>
+  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">7.3</span> Cross-validation</a></li>
   </ul>
 </nav>
     </div>
@@ -231,7 +217,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Retrieving the Dataset</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modelling</span></h1>
 </div>
 
 
@@ -246,84 +232,179 @@ div.csl-indent {
 
 </header>
 
-<p>The “Screening datasets for laser welded steel-copper lap joints” dataset is a valuable resource for researchers and engineers working in the field of laser welding. This dataset provides comprehensive information on the performance of steel-copper lap joints under different welding conditions <span class="citation" data-cites="Rinne2021">(<a href="references.html#ref-Rinne2021" role="doc-biblioref">Rinne 2021</a>)</span>. In this article, we will explore the different versions of the dataset, where to download them, their file types, and how to load them using the pandas library.</p>
-<p>At the time of this writing, this dataset have 4 versions:</p>
-<ul>
-<li><strong>V1</strong>: The initial version of the dataset.</li>
-<li><strong>V1.1</strong>: An updated version of V1 with additional data.</li>
-<li><strong>V2</strong>: A major update to the dataset with expanded features.</li>
-<li><strong>V2.1</strong>: A minor update to V2, addressing some issues and providing further enhancements.</li>
-</ul>
-<section id="downloading-the-dataset" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="downloading-the-dataset"><span class="header-section-number">4.1</span> Downloading the Dataset</h2>
-<p>To download the this dataset, the following python function was defined and used.</p>
 <div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> zipfile</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data Wrangling</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_file(url, filename):</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if file already exists in the directory</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> os.path.exists(<span class="ss">f"datasets/</span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss">"</span>):</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Print the directory tree relative to the datasets folder</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> root, dirs, files <span class="kw">in</span> os.walk(<span class="st">"datasets"</span>):</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>            level <span class="op">=</span> root.replace(<span class="st">"datasets"</span>, <span class="st">""</span>).count(os.sep)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            indent <span class="op">=</span> <span class="st">" "</span> <span class="op">*</span> <span class="dv">4</span> <span class="op">*</span> (level)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>indent<span class="sc">}{</span>os<span class="sc">.</span>path<span class="sc">.</span>basename(root)<span class="sc">}</span><span class="ss">/"</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            subindent <span class="op">=</span> <span class="st">" "</span> <span class="op">*</span> <span class="dv">4</span> <span class="op">*</span> (level <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> f <span class="kw">in</span> files:</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>subindent<span class="sc">}{</span>f<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Download the file from the internet</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        urllib.request.urlretrieve(url, <span class="ss">f"datasets/</span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"File '</span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss">' downloaded successfully."</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Extract the zip file</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> zipfile.ZipFile(<span class="ss">f"datasets/</span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss">"</span>, <span class="st">'r'</span>) <span class="im">as</span> zip_ref:</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            zip_ref.extractall(<span class="st">"datasets"</span>)</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Print the directory tree relative to the datasets folder</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> root, dirs, files <span class="kw">in</span> os.walk(<span class="st">"datasets"</span>):</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>            level <span class="op">=</span> root.replace(<span class="st">"datasets"</span>, <span class="st">""</span>).count(os.sep)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            indent <span class="op">=</span> <span class="st">" "</span> <span class="op">*</span> <span class="dv">4</span> <span class="op">*</span> (level)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>indent<span class="sc">}{</span>os<span class="sc">.</span>path<span class="sc">.</span>basename(root)<span class="sc">}</span><span class="ss">/"</span>)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>            subindent <span class="op">=</span> <span class="st">" "</span> <span class="op">*</span> <span class="dv">4</span> <span class="op">*</span> (level <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> f <span class="kw">in</span> files:</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>subindent<span class="sc">}{</span>f<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Data Visualization</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataset Splitting</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature Engineering Classes</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler, MinMaxScaler</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Machine Learning Model Classes</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> GaussianNB</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> (</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    RandomForestClassifier,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    VotingClassifier,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    BaggingClassifier,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    AdaBoostClassifier,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    StackingClassifier</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Classification Metrics</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://prod-dcd-datasets-cache-zipfiles.s3.eu-west-1.amazonaws.com/2s5m3crbkd-2.zip"</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>filename <span class="op">=</span> <span class="st">"laser-welding.zip"</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>download_file(url, filename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>datasets/
-    laser-welding.zip
-    V1.csv
-    Screening datasets for laser welded steel-copper lap joints/
-        V1 and V2/
-            Definitive screening steel-copper lap joints V1.xlsx
-            Definitive screening steel-copper lap joints V2.xlsx
-        V1.1 and V2.1/
-            Definitiv screening steel-copper lap joints V1.1.xlsx
-            Definitive screening steel-copper lap joints V2.1.xlsx</code></pre>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Classification Visualization</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> yellowbrick.classifier <span class="im">import</span> ConfusionMatrix, ClassificationReport, ROCAUC</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Base Classes</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.base <span class="im">import</span> ClassifierMixin, TransformerMixin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>Explanation:</p>
-<ol type="1">
-<li>The code imports the necessary modules: <code>os</code> for file and directory operations, <code>urllib.request</code> for downloading files from the internet, and <code>zipfile</code> for extracting zip files.</li>
-<li>The function <code>download_and_extract_file</code> takes two parameters: <code>url</code> (the URL of the file to be downloaded) and <code>filename</code> (the name of the file to be saved in the local directory).</li>
-<li>It checks if the file already exists in the <code>datasets</code> directory using the <code>os.path.exists</code> function. If it exists, it prints the directory tree relative to the <code>datasets</code> folder using the <code>os.walk</code> function.</li>
-<li>If the file does not exist, it downloads the file from the internet using <code>urllib.request.urlretrieve</code> and saves it in the <code>datasets</code> directory.</li>
-<li>It then extracts the zip file using the <code>zipfile.ZipFile</code> context manager and the <code>extractall</code> method, saving the extracted files in the <code>datasets</code> directory.</li>
-<li>Finally, it prints the directory tree relative to the <code>datasets</code> folder using the <code>os.walk</code> function.</li>
-</ol>
-<p>This code allows for downloading and extracting files from the internet, while also checking if the file already exists in the local directory. It provides a convenient way to manage datasets and avoid unnecessary downloads.</p>
+<section id="loading-the-dataset" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="loading-the-dataset"><span class="header-section-number">7.1</span> Loading the Dataset</h2>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dataset_uri <span class="op">=</span> <span class="st">"datasets/V1.csv"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> pd.read_csv(dataset_uri, index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>dataset.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
-<div id="ref-Rinne2021" class="csl-entry" role="listitem">
-Rinne, Jonas. 2021. <span>“Screening Datasets for Laser Welded Steel-Copper Lap Joints.”</span> Mendeley Data. <a href="https://doi.org/10.17632/2s5m3crbkd.2">https://doi.org/10.17632/2s5m3crbkd.2</a>.
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">power (W)</th>
+<th data-quarto-table-cell-role="th">welding speed (m/min)</th>
+<th data-quarto-table-cell-role="th">gas flow rate (l/min)</th>
+<th data-quarto-table-cell-role="th">focal position (mm)</th>
+<th data-quarto-table-cell-role="th">angular position (°)</th>
+<th data-quarto-table-cell-role="th">material thickness (mm)</th>
+<th data-quarto-table-cell-role="th">weld number</th>
+<th data-quarto-table-cell-role="th">cross section positon in the weld (mm)</th>
+<th data-quarto-table-cell-role="th">cracking in the weld metal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1050</td>
+<td>1.0</td>
+<td>15</td>
+<td>0</td>
+<td>0</td>
+<td>0.6</td>
+<td>1</td>
+<td>8</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1050</td>
+<td>1.0</td>
+<td>15</td>
+<td>0</td>
+<td>0</td>
+<td>0.6</td>
+<td>1</td>
+<td>16</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1050</td>
+<td>1.0</td>
+<td>15</td>
+<td>0</td>
+<td>0</td>
+<td>0.6</td>
+<td>1</td>
+<td>24</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1050</td>
+<td>1.0</td>
+<td>15</td>
+<td>0</td>
+<td>0</td>
+<td>0.6</td>
+<td>1</td>
+<td>32</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1050</td>
+<td>1.0</td>
+<td>15</td>
+<td>0</td>
+<td>0</td>
+<td>0.6</td>
+<td>2</td>
+<td>8</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
 </div>
 </div>
+</div>
+</section>
+<section id="splitting-the-dataset" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="splitting-the-dataset"><span class="header-section-number">7.2</span> Splitting the Dataset</h2>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vertical Split</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> dataset.iloc[:, :<span class="op">-</span><span class="dv">1</span>].values</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> dataset.iloc[:, <span class="op">-</span><span class="dv">1</span>].values</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Horizontal Split</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>X_eval, X_test, y_eval, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">22</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cross-validation" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="cross-validation"><span class="header-section-number">7.3</span> Cross-validation</h2>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score, cross_validate</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>pipeline <span class="op">=</span> Pipeline(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span>[</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"std_scaler"</span>, StandardScaler()),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"classifier"</span>, LogisticRegression())</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>scorings <span class="op">=</span> [<span class="st">'accuracy'</span>, <span class="st">'precision'</span>, <span class="st">'recall'</span>, <span class="st">'f1'</span>]</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>metrics <span class="op">=</span> pd.DataFrame(cross_validate(pipeline, X_eval, y_eval, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span>scorings))</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>metrics_viz <span class="op">=</span> sns.boxplot(metrics.iloc[:, <span class="dv">2</span>:])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="modelling-1_files/figure-html/cell-5-output-1.png" width="568" height="410"></p>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -562,13 +643,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./project_overview.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Project Overview</span></span>
+      <a href="./modelling.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modelling</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./exploring-data.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./summary.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
