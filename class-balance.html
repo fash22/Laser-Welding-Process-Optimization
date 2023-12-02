@@ -245,10 +245,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Let’s now improve the baseline metrics by engineering the data itself while maintaining the default hyper-parameters of each models. In this section, oversampling techniques will be employed to address class imbalance on the target variable. To do this, the imblearn library will be used. Then, cross validation of accuracy, f1, precision, and recall will once again be conducted in order to check if the performance will improve.</p>
+<p>In this section, we will tackle the issue of class imbalance in the target variable by employing oversampling techniques. By engineering the data itself, we aim to improve the baseline metrics of our models while keeping the default hyperparameters. To achieve this, we will utilize the imblearn library and apply oversampling methods such as SMOTE and ADASYN. We will then conduct cross validation to evaluate the performance of our models in terms of accuracy, f1 score, precision, and recall.</p>
 <section id="importing-libraries" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="importing-libraries"><span class="header-section-number">7.1</span> Importing Libraries</h2>
-<p>We will start by importing the relevant libraries for this section.</p>
+<p>To begin, we will import the necessary libraries for this section.</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -276,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="loading-and-splitting-the-dataset" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="loading-and-splitting-the-dataset"><span class="header-section-number">7.2</span> Loading and Splitting The Dataset</h2>
-<p>Then, we we will load the dataset into a pandas data frame and split them vertically into feature matrix and target vector. Once done, we will split the data horizontally into training set and testing set. The training set will be used for training and cross validation while the testing set will be used on model evaluation.</p>
+<p>Next, we will load the dataset into a pandas data frame and split it into a feature matrix and target vector. We will then further split the data into a training set and a testing set. The training set will be used for training and cross validation, while the testing set will be used for model evaluation.</p>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dataset_uri <span class="op">=</span> <span class="st">"datasets/V1.csv"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> pd.read_csv(dataset_uri, index_col<span class="op">=</span><span class="dv">0</span>)</span>
@@ -295,7 +295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="resampling-minority-class" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="resampling-minority-class"><span class="header-section-number">7.3</span> Resampling Minority Class</h2>
-<p>To deal with unbalanced class, we can use the imblearn SMOTE and ADASYN functions.</p>
+<p>To address the issue of class imbalance, we will utilize the SMOTE and ADASYN functions from the imblearn library. These techniques will help us oversample the minority class and create a more balanced dataset.</p>
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X_train_SMOTE, y_train_SMOTE <span class="op">=</span> SMOTE().fit_resample(X, y)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X_train_ADASYN, y_train_ADASYN <span class="op">=</span> ADASYN().fit_resample(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -305,7 +305,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="7.4" class="anchored" data-anchor-id="cross-validation-metrics"><span class="header-section-number">7.4</span> Cross Validation Metrics</h2>
 <section id="cross-validation-utility-class" class="level3" data-number="7.4.1">
 <h3 data-number="7.4.1" class="anchored" data-anchor-id="cross-validation-utility-class"><span class="header-section-number">7.4.1</span> Cross Validation Utility Class</h3>
-<p>The code below is the same code used on the modelling section. It will conduct a 10-fold cross validation on the training set using the 5 machine learning models.</p>
+<p>We will use a utility class that conducts a 10-fold cross validation on the training set using five different machine learning models. This class will help us evaluate the performance of each model.</p>
+<p>Next, we will use the utility class to build a metrics dataframe. This dataframe will contain the results of the 10-fold cross validation for each model, using both the original unbalanced data and the resampled data. We will focus on the f1 score, as it is the key metric highlighted in the project overview. Our goal is to achieve a minimum acceptable f1 score of 0.85.</p>
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ClassifierEvaluator():</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, estimators: <span class="bu">list</span>[ClassifierMixin]) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
@@ -362,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    ],</span>
 <span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now, let’s use the utility class and use it to build the metrics dataframe. This dataframe contains the results of 10-fold cross validation across the 5-models, and across three types of data – unbalanced, SMOTE, and ADASYN. Once the metrics dataframe was built, we will analyze the each of the models’ performance using the their f1 score as highlighted in the <a href="./project_overview.html">Project Overview</a> section. The minimum acceptable performance for f1-score is 0.85.</p>
+<p>Based on the metrics, we found that only the KNeighborsClassifier and SVC models surpassed the baseline f1 score of 0.85 by a small margin. However, when using the resampled data, the average f1 score significantly increased. Additionally, the ADASYN data consistently outperformed the SMOTE data.</p>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>UNBAL_results <span class="op">=</span> evaluator.tabulate_cross_validation_metrics(X_train, y_train)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>SMOTE_results <span class="op">=</span> evaluator.tabulate_cross_validation_metrics(X_train_SMOTE, y_train_SMOTE)</span>
@@ -408,31 +409,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td rowspan="3" data-quarto-table-cell-role="th" data-valign="top">DecisionTreeClassifier</td>
 <td data-quarto-table-cell-role="th">ADASYN</td>
 <td>0.917102</td>
-<td>0.911182</td>
+<td>0.911397</td>
 <td>0.971875</td>
-<td>0.932039</td>
+<td>0.931910</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">SMOTE</td>
 <td>0.908065</td>
-<td>0.910683</td>
-<td>0.948387</td>
-<td>0.920319</td>
+<td>0.905505</td>
+<td>0.958065</td>
+<td>0.922635</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">UNBAL</td>
-<td>0.941379</td>
-<td>0.791667</td>
+<td>0.948276</td>
+<td>0.833333</td>
 <td>0.800000</td>
-<td>0.785000</td>
+<td>0.800476</td>
 </tr>
 <tr class="even">
 <td rowspan="3" data-quarto-table-cell-role="th" data-valign="top">GaussianNB</td>
 <td data-quarto-table-cell-role="th">ADASYN</td>
-<td>0.924424</td>
-<td>0.891070</td>
+<td>0.921198</td>
+<td>0.886760</td>
 <td>1.000000</td>
-<td>0.937035</td>
+<td>0.934491</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">SMOTE</td>
@@ -451,10 +452,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td rowspan="3" data-quarto-table-cell-role="th" data-valign="top">KNeighborsClassifier</td>
 <td data-quarto-table-cell-role="th">ADASYN</td>
-<td>0.950256</td>
-<td>0.928059</td>
-<td>0.996875</td>
-<td>0.957550</td>
+<td>0.950230</td>
+<td>0.928237</td>
+<td>0.996774</td>
+<td>0.957496</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">SMOTE</td>
@@ -502,10 +503,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">SMOTE</td>
-<td>0.950000</td>
-<td>0.927398</td>
+<td>0.951613</td>
+<td>0.928831</td>
 <td>0.996774</td>
-<td>0.957118</td>
+<td>0.958150</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">UNBAL</td>
@@ -555,31 +556,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td rowspan="3" data-quarto-table-cell-role="th" data-valign="top">DecisionTreeClassifier</td>
 <td data-quarto-table-cell-role="th">ADASYN</td>
 <td>0.132454</td>
-<td>0.150885</td>
-<td>0.059748</td>
-<td>0.094299</td>
+<td>0.150921</td>
+<td>0.063276</td>
+<td>0.094462</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">SMOTE</td>
-<td>0.127919</td>
-<td>0.150605</td>
-<td>0.073245</td>
-<td>0.095141</td>
+<td>0.140208</td>
+<td>0.158873</td>
+<td>0.066371</td>
+<td>0.103529</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">UNBAL</td>
-<td>0.058722</td>
-<td>0.246112</td>
+<td>0.052042</td>
+<td>0.222222</td>
 <td>0.258199</td>
-<td>0.231246</td>
+<td>0.220497</td>
 </tr>
 <tr class="even">
 <td rowspan="3" data-quarto-table-cell-role="th" data-valign="top">GaussianNB</td>
 <td data-quarto-table-cell-role="th">ADASYN</td>
-<td>0.103384</td>
-<td>0.137058</td>
+<td>0.105714</td>
+<td>0.138134</td>
 <td>0.000000</td>
-<td>0.082306</td>
+<td>0.083436</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">SMOTE</td>
@@ -598,10 +599,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td rowspan="3" data-quarto-table-cell-role="th" data-valign="top">KNeighborsClassifier</td>
 <td data-quarto-table-cell-role="th">ADASYN</td>
-<td>0.083646</td>
-<td>0.115139</td>
-<td>0.009882</td>
-<td>0.067886</td>
+<td>0.082962</td>
+<td>0.115160</td>
+<td>0.010201</td>
+<td>0.067072</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">SMOTE</td>
@@ -649,10 +650,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">SMOTE</td>
-<td>0.083792</td>
-<td>0.115618</td>
+<td>0.079381</td>
+<td>0.111959</td>
 <td>0.010201</td>
-<td>0.068164</td>
+<td>0.065459</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">UNBAL</td>
@@ -667,11 +668,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>In terms of spread of values, the variability of f1 scores of SVC, KNeighborsClassifier, and DecisionTree models was reduced after using the oversampled data. In contrast, for LogisticRegression and GaussianNB models, their variability increased after using the resampled data.</p>
+<p>Analyzing the spread of values, we observed that the variability of f1 scores for the SVC, KNeighborsClassifier, and DecisionTree models decreased after using the oversampled data. On the other hand, the variability increased for the LogisticRegression and GaussianNB models.</p>
 </section>
 <section id="side-by-side-visualization" class="level3" data-number="7.4.4">
 <h3 data-number="7.4.4" class="anchored" data-anchor-id="side-by-side-visualization"><span class="header-section-number">7.4.4</span> Side-by-side Visualization</h3>
-<p>Now let’s try to visualize these metrics. The utility function below will be used to plot each metric for each model for each training set used.</p>
+<p>To provide a visual representation of the metrics, we created a utility function that plots each metric for each model and training set used.</p>
 <div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compare_metrics(model_name):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    metric_names <span class="op">=</span> metrics.columns</span>
@@ -744,7 +745,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="conclusion" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">7.5</span> Conclusion</h2>
-<p>Based on the results of the cross validation, significant performance boost was achieved by addressing the issue of class imbalance on the target variable. Using the ADASYN resampling technique proves to result in much higher average f1 scores. This allows the 5 models to perform excellently without even tuning their respective hyper-parameters. Can we further improve the predictability of our models? In the next section, we will combine these 5 models together through the use of ensembling techniques to see if we can achieve much better performance.</p>
+<p>In conclusion, addressing the issue of class imbalance through oversampling techniques resulted in a significant performance boost for our models. The use of the ADASYN resampling technique yielded higher average f1 scores compared to SMOTE. This improvement was achieved without tuning the hyperparameters of the models. Moving forward, we will explore ensembling techniques in the next section to further enhance the predictability of our models.</p>
 
 
 </section>
